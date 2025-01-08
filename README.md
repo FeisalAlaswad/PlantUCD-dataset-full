@@ -55,3 +55,26 @@ Contributions to improve and expand the dataset are welcome! Please open an issu
 
 ## License
 This dataset is provided under the MIT License. See the `LICENSE` file for details.
+
+## Acknowledgments
+
+The authors would like to express their sincere gratitude to:
+
+- **Department of Computer Engineering and Automation, Damascus University**  
+- **Department of Computer Engineering, Aleppo University**  
+- **Department of Computing Technologies, SRM University**  
+- **University of Brescia**  
+
+for their invaluable support throughout this research.
+
+We extend our heartfelt gratitude to:  
+- **Prof. Amer Bouchi**  
+- **Prof. Hazem Issa**  
+- **Prof. Omer Alger**  
+- **Mr. Mohammad Aljaddouh**  
+- **Mrs. Fatina Alhamwi**  
+- **Mr. Firas Zeineddine**  
+- **Mrs. Batoul Aljaddouh**  
+
+for their invaluable contributions.
+
