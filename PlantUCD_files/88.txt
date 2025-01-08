@@ -1,0 +1,122 @@
+@startuml
+
+class ProductionOrder {
+    +int orderId
+    +string product
+    +int quantity
+    +string status
+}
+
+class WorkOrder {
+    +int workOrderId
+    +int orderId
+    +string workStatus
+}
+
+ProductionOrder "1" -- "0..*" WorkOrder : contains
+
+class Inventory {
+    +int itemId
+    +string itemName
+    +int quantity
+}
+
+class RawMaterial {
+    +int materialId
+    +string materialName
+    +int quantity
+}
+
+Inventory "1" -- "0..*" RawMaterial : manages
+
+class Machine {
+    +int machineId
+    +string machineName
+    +string status
+}
+
+class MachineData {
+    +int dataId
+    +int machineId
+    +string parameter
+    +float value
+}
+
+Machine "1" -- "0..*" MachineData : produces
+
+class Workforce {
+    +int employeeId
+    +string name
+    +string role
+}
+
+class Shift {
+    +int shiftId
+    +string shiftTime
+    +int workforceId
+}
+
+Workforce "1" -- "0..*" Shift : works on
+
+class QualityControl {
+    +int controlId
+    +string testName
+    +float testResult
+}
+
+ProductionOrder "1" -- "0..*" QualityControl : undergoes
+
+class ProductionLine {
+    +int lineId
+    +string lineName
+    +string configurationDetails
+}
+
+class Product {
+    +int productId
+    +string productName
+}
+
+ProductionLine "1" -- "0..*" Product : manufactures
+
+class Maintenance {
+    +int maintenanceId
+    +int machineId
+    +string maintenanceType
+    +date scheduledDate
+}
+
+Machine "1" -- "0..*" Maintenance : undergoes
+
+class ProductionProgress {
+    +int progressId
+    +int orderId
+    +string status
+    +int completedPercentage
+}
+
+ProductionOrder "1" -- "0..*" ProductionProgress : tracks
+
+class Material {
+    +int materialId
+    +string materialName
+    +int quantity
+}
+
+class MRP {
+    +int mrpId
+    +int materialId
+    +int requiredQuantity
+}
+
+Material "1" -- "0..*" MRP : is planned for
+
+class Report {
+    +int reportId
+    +string reportType
+    +date generatedDate
+}
+
+Report "1" -- "0..*" ProductionOrder : includes
+
+@enduml

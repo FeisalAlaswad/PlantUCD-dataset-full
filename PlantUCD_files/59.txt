@@ -1,0 +1,111 @@
+@startUML
+
+class User {
+  + username: String
+  + password: String
+  + email: String
+  + register(): void
+  + login(): boolean
+}
+
+class GameLibrary {
+  + games: List<Game>
+  + searchGame(name: String): Game
+  + listAllGames(): List<Game>
+}
+
+class Game {
+  + title: String
+  + genre: String
+  + rating: float
+}
+
+class Lobby {
+  + roomID: String
+  + users: List<User>
+  + joinRoom(user: User): void
+  + leaveRoom(user: User): void
+}
+
+class Leaderboard {
+  + entries: List<ScoreEntry>
+  + updateLeaderboard(user: User, score: int): void
+}
+
+class ScoreEntry {
+  + username: String
+  + score: int
+}
+
+class Purchase {
+  + item: String
+  + cost: float
+  + purchaseItem(user: User): void
+}
+
+class Chat {
+  + messages: List<Message>
+  + sendMessage(user: User, text: String): void
+}
+
+class Message {
+  + text: String
+  + timestamp: Date
+}
+
+class Achievement {
+  + title: String
+  + description: String
+}
+
+class Subscription {
+  + planName: String
+  + price: float
+  + subscribe(user: User): void
+}
+
+class Report {
+  + type: String
+  + generate(): void
+}
+
+class Analytics {
+  + reports: List<Report>
+  + generateAnalytics(): void
+}
+
+class ParentalControl {
+  + restrictedGames: List<Game>
+  + addRestriction(game: Game): void
+}
+
+class Review {
+  + text: String
+  + rating: int
+}
+
+class SocialMedia {
+  + shareAchievement(user: User, achievement: Achievement): void
+}
+
+' Relationships
+User "1" -- "1" GameLibrary: owns
+GameLibrary "1" -- "many" Game: contains
+Game "1" -- "many" Lobby: supports
+Lobby "1" -- "1" Chat: includes
+User "1" -- "many" Message: sends
+User "1" -- "many" Purchase: makes
+Leaderboard "1" -- "many" ScoreEntry: contains
+User "1" -- "many" ScoreEntry: contributes
+User "1" -- "many" Achievement: earns
+Game "1" -- "many" Achievement: offers
+User "1" -- "1..*" Subscription: subscribes
+Analytics "1" -- "many" Report: contains
+Game "1" -- "1" Analytics: provides
+User "1" -- "1" ParentalControl: manages
+Game "1" -- "many" Review: has
+User "1" -- "many" Review: writes
+User "1" -- "1" SocialMedia: uses
+Achievement "1" -- "1" SocialMedia: shares
+
+@endUML

@@ -1,0 +1,85 @@
+@startuml
+class Member {
+    +id: int
+    +name: String
+    +email: String
+    +membershipType: String
+}
+
+class Trainer {
+    +id: int
+    +name: String
+    +specialization: String
+}
+
+class FitnessPlan {
+    +id: int
+    +description: String
+    +duration: int
+}
+
+class FitnessClass {
+    +id: int
+    +name: String
+    +schedule: String
+}
+
+class Attendance {
+    +id: int
+    +date: Date
+}
+
+class Payment {
+    +id: int
+    +amount: double
+    +date: Date
+}
+
+class Progress {
+    +id: int
+    +weight: double
+    +bodyFatPercentage: double
+    +recordedDate: Date
+}
+
+class Equipment {
+    +id: int
+    +name: String
+    +status: String
+}
+
+class Maintenance {
+    +id: int
+    +date: Date
+    +details: String
+}
+
+class DietPlan {
+    +id: int
+    +description: String
+    +calories: int
+}
+
+class Admin {
+    +id: int
+    +name: String
+    +role: String
+}
+
+Member "1" --> "1..*" Trainer : "assigned to"
+Trainer "1" --> "0..*" FitnessPlan : "creates"
+Member "1" --> "1..*" FitnessPlan : "assigned"
+Member "0..*" --> "0..*" FitnessClass : "enrolls"
+FitnessClass "1" --> "0..*" Attendance : "records"
+Member "0..*" --> "0..*" Attendance : "logs"
+Member "1" --> "0..*" Payment : "makes"
+Member "1" --> "0..*" Progress : "records"
+Trainer "0..*" --> "0..*" Progress : "monitors"
+Equipment "1" --> "0..*" Maintenance : "has"
+Trainer "1" --> "0..*" DietPlan : "assigns"
+Member "1" --> "0..*" DietPlan : "follows"
+Admin "1" --> "0..*" Member : "manages"
+Admin "1" --> "0..*" Trainer : "manages"
+Admin "1" --> "0..*" FitnessClass : "manages"
+Admin "1" --> "0..*" Equipment : "manages"
+@enduml

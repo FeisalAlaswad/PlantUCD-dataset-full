@@ -1,0 +1,85 @@
+
+@startuml
+class ProcurementOrder {
+    +int orderID
+    +date orderDate
+    +string orderStatus
+}
+
+class Supplier {
+    +int supplierID
+    +string name
+    +string contactInfo
+    +double rating
+}
+
+class Product {
+    +int productID
+    +string productName
+    +double price
+}
+
+class Inventory {
+    +int productID
+    +int quantityInStock
+}
+
+class PurchaseRequest {
+    +int requestID
+    +string status
+}
+
+class Employee {
+    +int employeeID
+    +string name
+}
+
+class Invoice {
+    +int invoiceID
+    +date invoiceDate
+    +double amount
+}
+
+class Payment {
+    +int paymentID
+    +date paymentDate
+    +double amount
+}
+
+class SupplierEvaluation {
+    +int evaluationID
+    +string criteria
+    +int score
+}
+
+class Category {
+    +int categoryID
+    +string categoryName
+}
+
+class Delivery {
+    +int deliveryID
+    +date deliveryDate
+    +string deliveryStatus
+}
+
+class Report {
+    +int reportID
+    +string reportType
+}
+
+ProcurementOrder "1" -- "1..*" Supplier : placesOrder
+ProcurementOrder "1" -- "1..*" Product : includesProduct
+Supplier "1" -- "0..*" ProcurementOrder : managesOrders
+Product "1" -- "1" Inventory : managesStock
+PurchaseRequest "1" -- "1" Employee : initiatedBy
+PurchaseRequest "1" -- "1..*" Product : containsProduct
+Invoice "1" -- "1" ProcurementOrder : generatesInvoice
+Invoice "1" -- "1" Payment : linkedTo
+Supplier "1" -- "1..*" SupplierEvaluation : evaluatedBy
+Product "1..*" -- "1..*" Category : belongsTo
+ProcurementOrder "1" -- "0..*" Delivery : tracksDelivery
+Report "1" -- "1..*" ProcurementOrder : basedOnOrder
+Report "1" -- "1..*" Supplier : evaluatesSupplier
+
+@enduml
