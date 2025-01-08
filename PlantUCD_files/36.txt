@@ -1,0 +1,75 @@
+@startuml
+
+class User {
+  +id: String
+  +name: String
+  +email: String
+}
+
+class Student {
+  +studentId: String
+  +enrollInExam(): void
+}
+
+class Admin {
+  +adminId: String
+  +manageUsers(): void
+}
+
+class Exam {
+  +examId: String
+  +title: String
+  +duration: int
+  +scheduleExam(): void
+}
+
+class Subject {
+  +subjectId: String
+  +name: String
+}
+
+class Question {
+  +questionId: String
+  +text: String
+  +options: List<String>
+  +correctAnswer: String
+}
+
+class QuestionBank {
+  +addQuestion(): void
+  +removeQuestion(): void
+  +updateQuestion(): void
+}
+
+class ExamParticipation {
+  +participationId: String
+  +submitAnswer(): void
+  +calculateResult(): float
+}
+
+class Result {
+  +resultId: String
+  +score: float
+  +generateReport(): void
+}
+
+User <|-- Student
+User <|-- Admin
+Admin --* Student : manages
+
+Exam *-- Subject : "is based on"
+Admin --* Exam : "creates/manages"
+
+Subject --* QuestionBank : "has"
+QuestionBank *-- Question : "contains"
+Admin --* QuestionBank : "manages"
+
+Student --* ExamParticipation : "participates in"
+Exam --* ExamParticipation : "has instances of"
+ExamParticipation --> Exam : "associated with"
+
+Student --> Result : "views"
+Exam --* Result : "generates"
+Admin --* Result : "manages"
+
+@enduml

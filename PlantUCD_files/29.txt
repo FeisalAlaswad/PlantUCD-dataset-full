@@ -1,0 +1,52 @@
+@startUML
+class User {
+    - userId: String
+    - name: String
+    - email: String
+    - password: String
+}
+
+class Admin {
+    + addService()
+    + removeService()
+}
+
+class Client {
+    + bookAppointment()
+    + cancelAppointment()
+}
+
+class Appointment {
+    - appointmentId: String
+    - date: Date
+    - time: Time
+}
+
+class Service {
+    - serviceId: String
+    - name: String
+    - description: String
+    - duration: Int
+}
+
+class Notification {
+    - notificationId: String
+    - message: String
+    - timestamp: DateTime
+}
+
+class TimeSlot {
+    - slotId: String
+    - startTime: Time
+    - endTime: Time
+}
+
+User <|-- Admin
+User <|-- Client
+Client "1" --> "0..*" Appointment
+Admin "1" --> "0..*" Service
+Admin "1" --> "0..*" TimeSlot
+Service "1" --> "0..*" TimeSlot
+Appointment "1" --> "0..*" Notification
+Client "1" --> "0..*" Notification
+@endUML
