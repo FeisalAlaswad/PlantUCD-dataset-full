@@ -60,9 +60,9 @@ This dataset is provided under the MIT License. See the `LICENSE` file for detai
 
 The authors would like to express their sincere gratitude to:
 
+- **Department of Computing Technologies, SRM University**  
 - **Department of Computer Engineering and Automation, Damascus University**  
 - **Department of Computer Engineering, Aleppo University**  
-- **Department of Computing Technologies, SRM University**  
 - **University of Brescia**  
 
 for their invaluable support throughout this research.
