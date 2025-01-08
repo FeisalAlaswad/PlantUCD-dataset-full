@@ -1,0 +1,84 @@
+class PRCampaign {
+    +campaignId: String
+    +campaignName: String
+    +startDate: Date
+    +endDate: Date
+}
+
+class MediaContact {
+    +contactId: String
+    +name: String
+    +phoneNumber: String
+    +email: String
+}
+
+class CommunicationLog {
+    +logId: String
+    +date: Date
+    +details: String
+}
+
+class Content {
+    +contentId: String
+    +type: String
+    +contentDetails: String
+}
+
+class CampaignPerformance {
+    +performanceId: String
+    +impressions: Int
+    +reach: Int
+    +clicks: Int
+}
+
+class Report {
+    +reportId: String
+    +dateGenerated: Date
+    +contentPerformance: String
+}
+
+class User {
+    +userId: String
+    +userName: String
+    +role: String
+}
+
+class Role {
+    +roleId: String
+    +roleName: String
+}
+
+class Approval {
+    +approvalId: String
+    +status: String
+    +approvedBy: String
+}
+
+class Event {
+    +eventId: String
+    +eventName: String
+    +eventDate: Date
+}
+
+class SocialMediaPost {
+    +postId: String
+    +platform: String
+    +postContent: String
+}
+
+class Budget {
+    +budgetId: String
+    +allocatedAmount: Double
+    +spentAmount: Double
+}
+
+PRCampaign "1" --> "*" MediaContact: manages
+MediaContact "1" --> "*" CommunicationLog: has
+PRCampaign "1" --> "*" Content: contains
+PRCampaign "1" --> "1" CampaignPerformance: tracks
+CampaignPerformance "1" --> "*" Report: generates
+User "1" --> "1" Role: has
+PRCampaign "1" --> "*" Approval: undergoes
+PRCampaign "1" --> "*" Event: organizes
+PRCampaign "1" --> "*" SocialMediaPost: linksTo
+PRCampaign "1" --> "1" Budget: has

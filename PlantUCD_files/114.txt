@@ -1,0 +1,148 @@
+@startuml
+
+' Requirement 1: User Login and Registration
+class User {
+  -userID: String
+  -username: String
+  -password: String
+  +register(): void
+  +login(): void
+}
+
+class Account {
+  -accountID: String
+  -user: User
+  +createAccount(): void
+  +deleteAccount(): void
+}
+
+User "1" -- "1" Account : manages
+
+' Requirement 2: Image Upload and Storage
+class Image {
+  -imageID: String
+  -imagePath: String
+  +uploadImage(): void
+  +deleteImage(): void
+}
+
+class Storage {
+  -storageID: String
+  -image: Image
+  +storeImage(): void
+  +retrieveImage(): void
+}
+
+Image "1" -- "1" Storage : stored in
+
+' Requirement 3: Image Editing Tools
+class ImageEditor {
+  +cropImage(): void
+  +rotateImage(): void
+  +resizeImage(): void
+  +adjustBrightness(): void
+  +adjustContrast(): void
+}
+
+ImageEditor "1" -- "1" Image : edits
+
+' Requirement 4: Undo and Redo Actions
+class History {
+  -actionID: String
+  +undo(): void
+  +redo(): void
+}
+
+class ImageEditor {
+  -history: History
+}
+
+History "1" -- "1" ImageEditor : tracks
+
+' Requirement 5: Filters and Effects
+class Filter {
+  -filterID: String
+  +applyFilter(): void
+}
+
+class Effect {
+  -effectID: String
+  +applyEffect(): void
+}
+
+class ImageEditor {
+  -filter: Filter
+  -effect: Effect
+}
+
+ImageEditor "1" -- "1" Filter : applies
+ImageEditor "1" -- "1" Effect : applies
+
+' Requirement 6: Save and Export Image
+class Export {
+  -format: String
+  +exportImage(): void
+}
+
+class Image {
+  -imageID: String
+  -imagePath: String
+}
+
+Image "1" -- "1" Export : saved as
+
+' Requirement 7: Multi-Layer Support
+class Layer {
+  -layerID: String
+  -layerContent: String
+}
+
+class ImageEditor {
+  -layers: List<Layer>
+  +addLayer(): void
+  +removeLayer(): void
+}
+
+ImageEditor "1" -- "*" Layer : contains
+
+' Requirement 8: Image Comparison
+class Comparison {
+  +compareImages(): void
+}
+
+class Image {
+  -originalImage: Image
+  -editedImage: Image
+}
+
+Comparison "1" -- "2" Image : compares
+
+' Requirement 9: User Settings and Preferences
+class UserSettings {
+  -settingID: String
+  -preferences: String
+  +setPreferences(): void
+}
+
+class User {
+  -settings: UserSettings
+}
+
+User "1" -- "1" UserSettings : manages
+
+' Requirement 10: Image Metadata
+class Metadata {
+  -resolution: String
+  -colorDepth: String
+  -size: String
+}
+
+class Image {
+  -imageID: String
+  -imagePath: String
+  -metadata: Metadata
+}
+
+Image "1" -- "1" Metadata : contains
+
+@enduml

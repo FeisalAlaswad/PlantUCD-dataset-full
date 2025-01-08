@@ -1,0 +1,151 @@
+class PatentApplication {
+  +int patentId
+  +string title
+  +string description
+  +Date submissionDate
+  +string status
+}
+
+class Applicant {
+  +int applicantId
+  +string name
+  +string contactInfo
+}
+
+PatentApplication "1" --> "1..*" Applicant : "has"
+
+class PatentApplication {
+  +int patentId
+  +string title
+  +string description
+  +Date submissionDate
+  +string status
+}
+
+class Examiner {
+  +int examinerId
+  +string name
+  +string department
+}
+
+PatentApplication "1" --> "1" Examiner : "reviewed by"
+
+class PatentApplication {
+  +int patentId
+  +string title
+  +string description
+  +Date submissionDate
+  +string status
+}
+
+class ApprovalStatus {
+  +string status
+  +Date approvalDate
+}
+
+PatentApplication "1" --> "1" ApprovalStatus : "has"
+
+class PatentApplication {
+  +int patentId
+  +string title
+  +string description
+  +Date submissionDate
+  +string status
+}
+
+class FilingHistory {
+  +Date actionDate
+  +string action
+  +string status
+}
+
+PatentApplication "1" --> "1..*" FilingHistory : "has"
+
+class Patent {
+  +int patentId
+  +string title
+  +Date expirationDate
+  +string status
+}
+
+class Renewal {
+  +Date renewalDate
+  +double feeAmount
+}
+
+Patent "1" --> "1..*" Renewal : "has"
+
+class Patent {
+  +int patentId
+  +string title
+  +Date expirationDate
+  +string status
+}
+
+class License {
+  +int licenseId
+  +Date startDate
+  +Date endDate
+  +double feeAmount
+}
+
+Patent "1" --> "1..*" License : "is licensed under"
+
+class Patent {
+  +int patentId
+  +string title
+  +Date expirationDate
+  +string status
+}
+
+class Litigation {
+  +int caseId
+  +Date caseDate
+  +string court
+  +string caseStatus
+}
+
+Patent "1" --> "0..*" Litigation : "is involved in"
+
+class Patent {
+  +int patentId
+  +string title
+  +string claims
+}
+
+class Infringement {
+  +int infringementId
+  +string infringementDetails
+  +Date detectionDate
+}
+
+Patent "1" --> "0..*" Infringement : "has"
+
+class User {
+  +int userId
+  +string name
+  +string role
+}
+
+class Patent {
+  +int patentId
+  +string title
+  +Date expirationDate
+  +string status
+}
+
+User "1" --> "0..*" Patent : "manages"
+
+class Patent {
+  +int patentId
+  +string title
+  +Date submissionDate
+  +string country
+}
+
+class Analytics {
+  +string metric
+  +double value
+}
+
+Patent "1" --> "0..*" Analytics : "provides"

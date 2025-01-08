@@ -1,0 +1,74 @@
+@startUML
+
+class Pilot {
+    +pilotId: String
+    +selectAircraft(aircraft: Aircraft): void
+}
+
+class Aircraft {
+    +aircraftId: String
+    +type: String
+}
+
+class FlightParameters {
+    +speed: Double
+    +altitude: Double
+    +fuelCapacity: Double
+}
+
+class Weather {
+    +temperature: Double
+    +windSpeed: Double
+    +visibility: Double
+    +getWeatherReport(): String
+}
+
+class CockpitDashboard {
+    +displayFlightData(flightData: String): void
+}
+
+class FlightScenario {
+    +departure: String
+    +destination: String
+    +setScenario(departure: String, destination: String): void
+}
+
+class SimulationLog {
+    +logId: String
+    +logData(data: String): void
+}
+
+class EmergencyScenario {
+    +scenarioType: String
+    +triggerEmergency(): void
+}
+
+class NavigationSystem {
+    +getCurrentPosition(): String
+}
+
+class SimulationTeam {
+    +teamId: String
+    +addMember(pilot: Pilot): void
+}
+
+class PerformanceEvaluator {
+    +evaluatePilot(pilot: Pilot): String
+}
+
+Pilot --> Aircraft : selects
+Aircraft *-- FlightParameters : defines
+Aircraft --> Weather : affectedBy
+Aircraft --> CockpitDashboard : monitoredBy
+Pilot --> FlightScenario : configures
+Aircraft --> FlightScenario : assignedTo
+Aircraft --> SimulationLog : records
+Pilot --> SimulationLog : accesses
+Aircraft --> EmergencyScenario : simulates
+Pilot --> EmergencyScenario : manages
+Aircraft --> NavigationSystem : integrates
+Pilot --> SimulationTeam : partOf
+Pilot --> PerformanceEvaluator : evaluatedBy
+SimulationLog --> PerformanceEvaluator : usedBy
+
+@endUML

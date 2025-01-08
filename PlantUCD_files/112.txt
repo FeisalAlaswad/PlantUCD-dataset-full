@@ -1,0 +1,83 @@
+@startuml
+
+class GeographicLocation {
+    +String name
+    +double latitude
+    +double longitude
+    +String data
+}
+
+class Coordinates {
+    +double latitude
+    +double longitude
+}
+
+GeographicLocation "1" -- "1" Coordinates : has
+
+class MapLayer {
+    +String name
+    +String layerType
+    +String data
+}
+
+class User {
+    +String username
+    +String password
+}
+
+User "1" -- "0..*" MapLayer : views
+
+MapLayer "1" -- "0..*" MapLayer : overlays
+
+class GeographicFeature {
+    +String featureName
+    +String featureType
+}
+
+GeographicLocation "1" -- "0..*" GeographicFeature : contains
+
+class SearchQuery {
+    +String queryText
+    +String featureType
+}
+
+SearchQuery "1" -- "0..*" GeographicFeature : searches
+
+class Annotation {
+    +String text
+    +String description
+}
+
+MapLayer "1" -- "0..*" Annotation : contains
+
+class SpatialAnalysis {
+    +double calculateDistance(GeographicFeature feature1, GeographicFeature feature2)
+    +double calculateArea(GeographicFeature feature)
+}
+
+GeographicFeature "1" -- "1" SpatialAnalysis : analyzes
+
+class Metadata {
+    +Date creationDate
+    +String author
+    +String dataSource
+}
+
+MapLayer "1" -- "1" Metadata : has
+
+class FileExport {
+    +String format
+    +void exportLayer(MapLayer layer)
+}
+
+MapLayer "1" -- "0..*" FileExport : can export
+
+class Role {
+    +String roleName
+    +List<String> permissions
+}
+
+User "1" -- "0..*" Role : has
+MapLayer "1" -- "0..*" Role : accessible by
+
+@enduml

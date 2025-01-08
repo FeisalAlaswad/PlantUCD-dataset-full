@@ -1,0 +1,87 @@
+@startuml
+class User {
+  - username: String
+  - password: String
+  + login(): Boolean
+}
+
+class Parent {
+  - role: String
+  + assignRole(user: User): void
+}
+
+Parent --|> User
+
+class TimeLimit {
+  - limitHours: int
+  + setLimit(hours: int): void
+  + checkLimit(): Boolean
+}
+
+class Child {
+  - usageTime: int
+}
+
+TimeLimit "1" -- "1" Child : sets
+
+class Application {
+  - appName: String
+  - isBlocked: Boolean
+  + blockApp(): void
+  + unblockApp(): void
+}
+
+Application -- "1..*" Child : uses
+
+class Website {
+  - url: String
+  - visitedAt: DateTime
+}
+
+Website -- "1..*" Child : visitedBy
+
+class ContentFilter {
+  - filterCategory: String
+  + applyFilter(category: String): void
+}
+
+ContentFilter "1" -- "1..*" Website : filters
+
+class Alert {
+  - message: String
+  - timestamp: DateTime
+  + sendAlert(): void
+}
+
+Alert -- "1..*" Parent : receives
+
+class Report {
+  - reportDate: DateTime
+  - usageSummary: String
+}
+
+Report -- "1..*" Parent : generates
+
+class RemoteControl {
+  - controlType: String
+  + adjustSettings(setting: String, value: String): void
+}
+
+RemoteControl "1" -- "1"  Parent : accessedBy
+
+class OverrideFeature {
+  - isOverrideEnabled: Boolean
+  + enableOverride(): void
+  + disableOverride(): void
+}
+
+OverrideFeature "1" -- "1" Parent : triggers
+
+class Profile {
+  - childName: String
+  - age: int
+  - deviceType: String
+}
+
+Profile "1" -- "1" Parent : manages
+@enduml
