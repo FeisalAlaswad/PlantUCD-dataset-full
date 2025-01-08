@@ -1,13 +1,12 @@
 # PlantUCD Dataset
 
 **Description:**
-PlantUCD_dataset is a comprehensive collection of PlantUML code paired with corresponding software requirements, designed to assist in understanding and modeling software systems.
+PlantUCD_dataset is a comprehensive collection of PlantUML code paired with corresponding software requirements, designed for Neural Machine Translation (NMT) in automatic class diagram modeling.
 
 ## Dataset Overview
-- **Total Records:** X (Replace with the actual count of records)
 - **File Format:**
   - JSON file containing all dataset records.
-  - Supporting files include `.txt` (PlantUML full code), `.png` (class diagram images), and metadata.
+  - Supporting files include `.txt` (PlantUML full code), `.png` (class diagram images).
 
 ## Structure of a Record
 Each record in the dataset includes the following fields:
@@ -47,7 +46,7 @@ This dataset is intended for use in:
 ## How to Access
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo-name/PlantUCD-dataset.git
+   git clone https://github.com/FeisalAlaswad/PlantUCD-dataset-full.git
    ```
 2. Navigate to the dataset directory to explore the JSON file and associated resources.
 
