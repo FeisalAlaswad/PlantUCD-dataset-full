@@ -1,0 +1,84 @@
+@startUML
+class Employee {
+    + name: String
+    + contact: String
+    + dateOfBirth: Date
+    + jobTitle: String
+    + department: String
+    + salary: Double
+    + performanceReviews: List<PerformanceReview>
+}
+
+class PerformanceReview {
+    + reviewDate: Date
+    + comments: String
+    + score: Int
+}
+
+class Department {
+    + name: String
+    + budget: Double
+    + manager: Employee
+    + employees: List<Employee>
+}
+
+class LeaveRequest {
+    + leaveType: String
+    + startDate: Date
+    + endDate: Date
+    + status: String
+    + employee: Employee
+}
+
+class Payroll {
+    + employee: Employee
+    + baseSalary: Double
+    + deductions: Double
+    + bonuses: Double
+    + calculateNetPay(): Double
+}
+
+class JobPosting {
+    + jobTitle: String
+    + description: String
+    + status: String
+    + applications: List<Application>
+}
+
+class Application {
+    + applicantName: String
+    + contact: String
+    + resume: String
+    + status: String
+    + jobPosting: JobPosting
+}
+
+class EvaluationCriteria {
+    + criteria: String
+    + weight: Double
+}
+
+class PerformanceEvaluation {
+    + employee: Employee
+    + criteria: List<EvaluationCriteria>
+    + evaluationDate: Date
+    + overallScore: Double
+}
+
+class User {
+    + username: String
+    + password: String
+    + role: String // admin, employee
+}
+
+Employee "1" -- "many" PerformanceReview
+Department "1" -- "many" Employee
+Employee "1" -- "1" Department : "works in"
+Employee "1" -- "many" LeaveRequest
+Employee "1" -- "1" Payroll
+JobPosting "1" -- "many" Application
+Application "1" -- "1" JobPosting
+Employee "1" -- "many" PerformanceEvaluation
+PerformanceEvaluation "1" -- "many" EvaluationCriteria
+User "1" -- "1" Employee : "linked to"
+@endUML

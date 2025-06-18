@@ -1,0 +1,87 @@
+@startuml
+class WeatherData {
+  +source: String
+  +timestamp: Date
+  +temperature: Float
+  +humidity: Float
+  +windSpeed: Float
+}
+
+class DataSource {
+  +name: String
+  +type: String
+}
+
+class AnomalyProcessor {
+  +detectAnomalies(weatherData: WeatherData): List<String>
+}
+
+class Forecast {
+  +date: Date
+  +temperature: Float
+  +precipitation: Float
+}
+
+class ForecastGenerator {
+  +generateForecast(data: WeatherData): List<Forecast>
+}
+
+class Alert {
+  +alertType: String
+  +message: String
+  +timestamp: Date
+}
+
+class User {
+  +userId: String
+  +contactInfo: String
+}
+
+class NotificationPreference {
+  +userId: String
+  +preferenceType: String
+}
+
+class WeatherDisplay {
+  +displayCurrentData(data: WeatherData): void
+}
+
+class WeatherArchive {
+  +storeData(data: WeatherData): void
+}
+
+class Location {
+  +latitude: Float
+  +longitude: Float
+}
+
+class Language {
+  +languageCode: String
+  +languageName: String
+}
+
+class MultilingualSupport {
+  +translate(content: String, lang: Language): String
+}
+
+class WeatherAPI {
+  +getData(): WeatherData
+  +getForecast(): List<Forecast>
+}
+
+WeatherData --> DataSource : "collected from"
+WeatherData --> AnomalyProcessor : "processed by"
+ForecastGenerator --> Forecast : "creates"
+ForecastGenerator --> WeatherData : "uses"
+Alert --> User : "sent to"
+Alert --> Forecast : "triggered by"
+User --> NotificationPreference : "has"
+NotificationPreference --> Alert : "controls"
+WeatherData --> WeatherDisplay : "displayed by"
+WeatherData --> WeatherArchive : "stored in"
+WeatherData --> Location : "related to"
+Forecast --> Location : "specific to"
+MultilingualSupport --> Language : "supports"
+WeatherData --> WeatherAPI : "exposed through"
+Forecast --> WeatherAPI : "exposed through"
+@enduml

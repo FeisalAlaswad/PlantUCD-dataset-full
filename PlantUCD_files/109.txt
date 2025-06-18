@@ -1,0 +1,91 @@
+@startuml
+
+class OS {
+    +createProcess()
+    +scheduleProcess()
+    +terminateProcess()
+    +allocateMemory()
+    +deallocateMemory()
+    +createFile()
+    +deleteFile()
+    +readFile()
+    +writeFile()
+    +initializeDevice()
+    +manageDevice()
+    +displayUserInterface()
+    +authenticateUser()
+    +authorizeAccess()
+    +establishConnection()
+    +manageNetworkProtocols()
+    +scheduleTask()
+    +handleInterrupt()
+    +detectError()
+    +handleError()
+}
+
+class Process {
+    +processID
+    +state
+    +priority
+}
+
+class Memory {
+    +totalSize
+    +usedSize
+    +freeSize
+}
+
+class File {
+    +fileName
+    +fileSize
+    +fileType
+}
+
+class Device {
+    +deviceID
+    +deviceType
+    +deviceStatus
+}
+
+class UserInterface {
+    +interfaceType
+    +UIStatus
+}
+
+class User {
+    +userID
+    +userRole
+}
+
+class Network {
+    +protocol
+    +status
+}
+
+class Task {
+    +taskID
+    +priorityLevel
+}
+
+class Interrupt {
+    +interruptType
+    +interruptSource
+}
+
+class Error {
+    +errorCode
+    +errorDescription
+}
+
+OS --> Process : manages
+OS --> Memory : manages
+OS --> File : manages
+OS --> Device : controls
+OS --> UserInterface : provides
+OS --> User : manages
+OS --> Network : controls
+OS --> Task : schedules
+OS --> Interrupt : responds
+OS --> Error : manages
+
+@enduml

@@ -1,0 +1,63 @@
+@startuml
+class User {
+    +id: int
+    +name: String
+    +email: String
+    +role: String
+    +create()
+    +update()
+    +delete()
+    +view()
+}
+
+class Admin {
+    +manageUsers()
+}
+
+class Technician
+class Customer
+
+User <|-- Admin
+User <|-- Technician
+User <|-- Customer
+
+class Ticket {
+    +id: int
+    +title: String
+    +description: String
+    +status: String
+    +create()
+    +updateStatus()
+}
+
+User "1" --> "*" Ticket : "creates"
+Technician "1" --> "*" Ticket : "assigned to"
+
+class KnowledgeBase {
+    +id: int
+    +title: String
+    +content: String
+    +category: String
+    +addArticle()
+    +updateArticle()
+    +deleteArticle()
+}
+
+Admin "1" --> "*" KnowledgeBase : "manages"
+
+class Report {
+    +generateTicketReport()
+    +viewSummary()
+}
+
+Admin "1" --> "*" Report : "generates"
+Ticket "1" --> "*" Report : "summarized in"
+
+class Notification {
+    +sendEmail()
+    +notifyTicketUpdate()
+}
+
+User "1" --> "*" Notification : "receives"
+Ticket "1" --> "*" Notification : "triggers"
+@enduml

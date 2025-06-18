@@ -1,0 +1,70 @@
+@startUML
+class Warehouse {
+    +warehouseId: String
+    +name: String
+    +location: String
+}
+
+class InventoryItem {
+    +itemId: String
+    +name: String
+    +quantity: int
+    +expiryDate: Date
+}
+
+class Supplier {
+    +supplierId: String
+    +name: String
+    +contactDetails: String
+}
+
+class PurchaseOrder {
+    +orderId: String
+    +orderDate: Date
+    +quantity: int
+}
+
+class Employee {
+    +employeeId: String
+    +name: String
+    +role: String
+}
+
+class Transaction {
+    +transactionId: String
+    +date: Date
+    +type: String
+    +quantity: int
+}
+
+class CustomerOrder {
+    +orderId: String
+    +customerName: String
+    +orderedQuantity: int
+}
+
+class Category {
+    +categoryId: String
+    +name: String
+}
+
+class Report {
+    +reportId: String
+    +type: String
+    +generatedDate: Date
+}
+
+Warehouse "1" --> "*" InventoryItem
+Supplier "1" --> "*" InventoryItem
+InventoryItem "1" --> "*" PurchaseOrder
+Supplier "1" --> "*" PurchaseOrder
+Warehouse "1" --> "*" Employee
+Employee "1" --> "*" InventoryItem : "updates"
+InventoryItem "1" --> "*" Transaction
+Employee "1" --> "*" Transaction
+InventoryItem "1" --> "*" CustomerOrder
+Category "1" --> "*" InventoryItem
+Report "1" --> "*" InventoryItem
+Report "1" --> "*" Transaction
+Report "1" --> "*" CustomerOrder
+@endUML

@@ -1,0 +1,74 @@
+@startUML
+class Robot {
+    id: int
+    capability: String
+    status: String
+}
+
+class Task {
+    id: int
+    type: String
+    status: String
+}
+
+class Location {
+    x: int
+    y: int
+    timestamp: DateTime
+}
+
+class Path {
+    points: List<Location>
+    status: String
+}
+
+class InventoryItem {
+    id: int
+    name: String
+    quantity: int
+}
+
+class Battery {
+    level: int
+    status: String
+}
+
+class ErrorLog {
+    id: int
+    timestamp: DateTime
+    description: String
+}
+
+class Supervisor {
+    id: int
+    name: String
+}
+
+class Priority {
+    level: String
+    weight: int
+}
+
+class Maintenance {
+    id: int
+    date: DateTime
+    description: String
+}
+
+class ExternalSystem {
+    id: int
+    name: String
+    type: String
+}
+
+Robot "1" --> "0..*" Task : assignedTasks
+Robot "1" --> "1" Location : currentLocation
+Robot "1" --> "1" Path : assignedPath
+Robot "1" --> "0..*" InventoryItem : interactingWith
+Robot "1" --> "1" Battery : hasBattery
+Robot "1" --> "0..*" ErrorLog : logs
+Supervisor "1" --> "0..*" Task : manuallyAssigns
+Task "1" --> "1" Priority : hasPriority
+Robot "1" --> "0..*" Maintenance : scheduledFor
+Robot "1" --> "0..*" ExternalSystem : communicatesWith
+@endUML

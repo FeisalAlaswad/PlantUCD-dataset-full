@@ -1,0 +1,101 @@
+@startUML
+class User {
+  +userId: String
+  +username: String
+  +password: String
+  +role: String
+}
+
+class Authentication {
+  +login(username, password)
+  +logout(userId)
+  +register(username, password, role)
+}
+
+class Risk {
+  +riskId: String
+  +title: String
+  +description: String
+  +category: String
+  +likelihood: int
+}
+
+class RiskAssessment {
+  +riskId: String
+  +impact: int
+  +likelihood: int
+  +riskScore: int
+  +assessRisk()
+}
+
+class MitigationPlan {
+  +planId: String
+  +riskId: String
+  +action: String
+  +deadline: Date
+}
+
+class RiskStatus {
+  +statusId: String
+  +riskId: String
+  +status: String
+  +updateStatus(status: String)
+}
+
+class Report {
+  +reportId: String
+  +generateReport()
+}
+
+class Notification {
+  +notificationId: String
+  +message: String
+  +sendNotification(userId)
+}
+
+class AuditLog {
+  +logId: String
+  +entity: String
+  +action: String
+  +timestamp: Date
+}
+
+class ExternalSystem {
+  +systemName: String
+  +syncRiskData()
+}
+
+class BackupSystem {
+  +backupId: String
+  +performBackup()
+  +recoverBackup()
+}
+
+class Scalability {
+  +handleLargeData()
+  +optimizePerformance()
+}
+
+class Encryption {
+  +encryptData(data: String): String
+  +decryptData(data: String): String
+}
+
+User -- Authentication : "authenticates"
+User "1" -- "0..*" Risk : "creates"
+Risk "1" -- "1" RiskAssessment : "is assessed by"
+Risk "1" -- "0..*" MitigationPlan : "has mitigation"
+Risk "1" -- "1..*" RiskStatus : "is monitored by"
+Report --> Risk : "summarizes"
+Report --> MitigationPlan : "includes mitigation plans"
+User "1" -- "0..*" Notification : "receives"
+AuditLog --> Risk : "tracks changes for"
+AuditLog --> MitigationPlan : "tracks changes for"
+ExternalSystem --> Risk : "synchronizes data"
+BackupSystem --> Risk : "backs up"
+BackupSystem --> MitigationPlan : "backs up"
+Scalability --> Risk
+Scalability --> User
+Encryption --> Risk : "secures"
+Encryption --> User : "secures"
+@endUML

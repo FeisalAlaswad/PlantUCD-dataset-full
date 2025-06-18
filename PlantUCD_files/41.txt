@@ -1,0 +1,59 @@
+@startUML
+class Policy {
+    +policyId: String
+    +policyType: String
+    +premiumAmount: Double
+    +startDate: Date
+    +endDate: Date
+    +updatePolicyDetails(): void
+}
+
+class Customer {
+    +customerId: String
+    +name: String
+    +contactInfo: String
+}
+
+class Admin {
+    +adminId: String
+    +name: String
+    +manageCustomers(): void
+}
+
+class Claim {
+    +claimId: String
+    +policyId: String
+    +claimAmount: Double
+    +claimStatus: String
+    +fileClaim(): void
+    +processClaim(): void
+}
+
+class Payment {
+    +paymentId: String
+    +amount: Double
+    +date: Date
+    +method: String
+}
+
+class Report {
+    +reportId: String
+    +reportType: String
+    +generateReport(): void
+}
+
+Customer "1" -- "0..*" Policy : owns
+Customer "1" -- "0..*" Claim : files
+Customer "1" -- "0..*" Payment : makes
+
+Policy "1" -- "0..*" Claim : associatedWith
+Policy "1" -- "0..*" Payment : relatedTo
+
+Admin "1" -- "1" Customer : manages
+Admin "1" -- "0..*" Claim : processes
+Admin "1" -- "0..*" Report : generates
+
+Report "1" -- "0..*" Policy : includesData
+Report "1" -- "0..*" Claim : includesData
+Report "1" -- "0..*" Payment : includesData
+@endUML

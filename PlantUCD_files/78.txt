@@ -1,0 +1,77 @@
+@startuml
+
+class Shipment {
+  +String shipmentId
+  +String origin
+  +String destination
+  +String status
+  +String shipmentHistory
+}
+
+class Vehicle {
+  +String vehicleId
+  +String vehicleType
+  +String status
+  +String capacity
+}
+
+class Driver {
+  +String driverId
+  +String driverName
+  +String licenseNumber
+  +String availabilityStatus
+}
+
+class Maintenance {
+  +String maintenanceId
+  +String vehicleId
+  +String maintenanceDate
+}
+
+class Assignment {
+  +String assignmentId
+  +String driverId
+  +String vehicleId
+  +String dateAssigned
+}
+
+class Inventory {
+  +String inventoryId
+  +String shipmentId
+  +String itemType
+  +int quantity
+}
+
+class Route {
+  +String routeId
+  +String origin
+  +String destination
+  +int distance
+  +int estimatedTime
+}
+
+class Schedule {
+  +String scheduleId
+  +String shipmentId
+  +String vehicleId
+  +String driverId
+  +String scheduledDate
+}
+
+class Report {
+  +String reportId
+  +String reportType
+  +String generatedDate
+}
+
+Shipment "1" -- "1..*" Vehicle : uses
+Shipment "1" -- "1..*" Driver : assignedTo
+Vehicle "1" -- "0..*" Maintenance : has
+Driver "1" -- "1..*" Assignment : has
+Shipment "1" -- "1..*" Inventory : contains
+Route "1" -- "1..*" Vehicle : takes
+Schedule "1" -- "1" Vehicle : scheduledFor
+Schedule "1" -- "1" Driver : assignedDriver
+Report "1" -- "0..*" Shipment : includes
+
+@enduml

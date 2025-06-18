@@ -1,0 +1,68 @@
+@startUML
+class User {
+    +id: String
+    +name: String
+}
+
+class LocationTracker {
+    +currentLocation: String
+    +trackLocation(): void
+}
+
+class Map {
+    +mapData: String
+    +renderMap(): void
+}
+
+class RouteCalculator {
+    +calculateShortestRoute(start: String, end: String): String
+}
+
+class Navigation {
+    +turnByTurnInstructions: String
+    +generateInstructions(route: String): void
+}
+
+class TransportationMode {
+    +modeType: String
+    +getMode(): String
+}
+
+class POI {
+    +searchPOI(query: String): List<String>
+}
+
+class SavedLocations {
+    +saveLocation(location: String): void
+    +retrieveLocations(): List<String>
+}
+
+class TrafficUpdate {
+    +getTrafficInfo(location: String): String
+}
+
+class VoiceAssistant {
+    +processVoiceInput(command: String): void
+    +provideVoiceOutput(instructions: String): void
+}
+
+class ETA {
+    +calculateETA(start: String, end: String, mode: String): String
+}
+
+User --> LocationTracker : "requests real-time location"
+LocationTracker --> Map : "provides coordinates for rendering"
+Map --> RouteCalculator : "requests route calculations"
+RouteCalculator --> Navigation : "provides route for instructions"
+User --> TransportationMode : "selects mode"
+RouteCalculator --> TransportationMode : "uses mode for calculations"
+Map --> POI : "queries POI for display"
+User --> POI : "searches points of interest"
+User --> SavedLocations : "manages saved locations"
+LocationTracker --> TrafficUpdate : "provides user location"
+Navigation --> TrafficUpdate : "displays traffic notifications"
+User --> VoiceAssistant : "uses voice commands"
+Navigation --> VoiceAssistant : "sends instructions for output"
+RouteCalculator --> ETA : "calculates ETA"
+User --> ETA : "requests ETA updates"
+@endUML

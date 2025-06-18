@@ -1,0 +1,98 @@
+@startuml
+
+class User {
+  +userID: int
+  +username: String
+  +password: String
+  +login(): void
+}
+
+class Administrator {
+  +manageUsers(): void
+}
+
+class Instructor {
+  +createCourse(): void
+  +gradeAssignments(): void
+}
+
+class Student {
+  +enrollCourse(): void
+  +submitAssignment(): void
+}
+
+class Course {
+  +courseID: int
+  +title: String
+  +description: String
+  +schedule: String
+  +addMaterial(): void
+}
+
+class Enrollment {
+  +enrollmentID: int
+  +date: Date
+  +status: String
+}
+
+class Assignment {
+  +assignmentID: int
+  +title: String
+  +description: String
+  +dueDate: Date
+}
+
+class Submission {
+  +submissionID: int
+  +content: String
+  +submissionDate: Date
+  +grade: String
+}
+
+class LearningMaterial {
+  +materialID: int
+  +title: String
+  +content: String
+  +uploadDate: Date
+}
+
+class Notification {
+  +notificationID: int
+  +message: String
+  +date: Date
+  +isRead: boolean
+}
+
+class Report {
+  +reportID: int
+  +type: String
+  +content: String
+  +generatedDate: Date
+}
+
+User <|-- Administrator
+User <|-- Instructor
+User <|-- Student
+
+Administrator "1" -- "many" Course : creates
+Instructor "1" -- "many" Course : manages
+Course "1" -- "many" Assignment : contains
+Course "1" -- "many" LearningMaterial : provides
+
+Student "1" -- "many" Enrollment : has
+Course "1" -- "many" Enrollment : includes
+Administrator "1" -- "many" Enrollment : manages
+
+Student "1" -- "many" Submission : submits
+Assignment "1" -- "many" Submission : includes
+Instructor "1" -- "many" Submission : grades
+
+Instructor "1" -- "many" LearningMaterial : uploads
+Student "many" -- "many" LearningMaterial : accesses
+
+User "1" -- "many" Notification : receives
+
+Administrator "1" -- "many" Report : generates
+Instructor "1" -- "many" Report : views
+
+@enduml

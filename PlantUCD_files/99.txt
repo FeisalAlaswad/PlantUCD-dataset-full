@@ -1,0 +1,140 @@
+
+@startuml
+
+class User {
+  +String username
+  +String password
+  +String role
+  +login(): boolean
+  +register(): boolean
+}
+
+class Admin {
+  +createUser(): boolean
+  +deleteUser(): boolean
+}
+
+User <|-- Admin
+
+class Team {
+  +String teamName
+  +List<User> members
+  +addMember(user: User): void
+  +removeMember(user: User): void
+}
+
+User --> Team : "belongs to"
+Team "1" --> "*" User : "has members"
+
+class Task {
+  +String taskName
+  +String description
+  +boolean completed
+  +assignTo(user: User): void
+}
+
+class Project {
+  +String projectName
+  +List<Task> tasks
+}
+
+Task --> User : "assigned to"
+Project --> Task : "includes"
+
+class Message {
+  +String content
+  +Date timestamp
+  +sendMessage(user: User): void
+}
+
+class Notification {
+  +String message
+  +Date date
+  +sendNotification(user: User): void
+}
+
+Message --> User : "sent by"
+Notification --> User : "received by"
+
+class File {
+  +String fileName
+  +byte[] content
+  +uploadFile(): void
+}
+
+class Collaboration {
+  +String fileName
+  +String content
+  +editFile(file: File): void
+}
+
+Team --> File : "shares"
+Collaboration --> File : "collaborates on"
+
+class Event {
+  +String eventName
+  +Date eventDate
+  +scheduleEvent(): void
+}
+
+class Calendar {
+  +String calendarName
+  +List<Event> events
+  +addEvent(event: Event): void
+}
+
+Calendar --> Event : "includes"
+
+class Role {
+  +String roleName
+  +List<String> permissions
+}
+
+class User {
+  +Role role
+  +accessResource(): boolean
+}
+
+User --> Role : "has"
+Role "1" --> "*" Permission : "grants"
+
+class Report {
+  +String reportName
+  +generateReport(): void
+}
+
+class Analytics {
+  +String metric
+  +generateMetrics(): void
+}
+
+Report --> Analytics : "includes"
+
+class Activity {
+  +String activityType
+  +Date timestamp
+  +showActivity(): void
+}
+
+class Feed {
+  +List<Activity> activities
+  +displayFeed(): void
+}
+
+Feed --> Activity : "displays"
+
+class Settings {
+  +String theme
+  +boolean emailNotifications
+  +updateSettings(): void
+}
+
+class User {
+  +Settings settings
+  +updateProfile(): void
+}
+
+User --> Settings : "has"
+
+
+@enduml

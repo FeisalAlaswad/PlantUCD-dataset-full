@@ -1,0 +1,41 @@
+@startuml
+class Supplier {
+    +id: Integer
+    +name: String
+    +contactDetails: String
+    +productOfferings: List<String>
+}
+
+class Administrator {
+    +addSupplier(supplier: Supplier): void
+    +updateSupplier(supplier: Supplier): void
+    +removeSupplier(supplierId: Integer): void
+    +monitorStockLevels(): void
+}
+
+class Order {
+    +orderId: Integer
+    +status: String
+    +supplierId: Integer
+    +orderDate: Date
+    +deliveryDate: Date
+}
+
+class Product {
+    +productId: Integer
+    +name: String
+    +stockLevel: Integer
+    +threshold: Integer
+}
+
+class Report {
+    +generateSupplierReport(): void
+    +generateOrderHistory(): void
+    +generateInventoryReport(): void
+}
+
+Administrator --> Supplier : "manages"
+Order --> Supplier : "belongs to"
+Administrator --> Product : "monitors"
+Administrator --> Report : "generates"
+@enduml

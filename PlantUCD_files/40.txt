@@ -1,0 +1,63 @@
+@startUML
+class User {
+    +username: String
+    +password: String
+    +email: String
+    +role: String
+}
+
+class Admin {
+    +manageUsers(): void
+}
+
+class StandardUser {
+}
+
+User <|-- Admin
+User <|-- StandardUser
+
+class Document {
+    +title: String
+    +author: String
+    +uploadDate: Date
+    +tags: List<String>
+}
+
+class Category {
+    +name: String
+    +description: String
+}
+
+Category "1" *-- "0..*" Document
+
+class DocumentVersion {
+    +versionNumber: int
+    +timestamp: Date
+    +changes: String
+}
+
+Document "1" *-- "0..*" DocumentVersion
+
+class AccessControl {
+    +permissions: List<String>
+    +checkAccess(user: User, document: Document): Boolean
+}
+
+Document "1" *-- "1" AccessControl
+AccessControl "1" *-- "0..*" User
+
+class Workflow {
+    +name: String
+    +steps: List<String>
+}
+
+Document "1" *-- "0..1" Workflow
+
+class AuditLog {
+    +user: User
+    +action: String
+    +timestamp: Date
+}
+
+Document "1" *-- "0..*" AuditLog
+@endUML

@@ -1,0 +1,58 @@
+class FleetManager {
+  +viewReports()
+  +assignTask()
+  +generateReport()
+}
+
+class Vehicle {
+  -vehicleID String
+  -make String
+  -model String
+  -fuelUsage Float
+  -location String
+  +trackFuelUsage()
+  +scheduleMaintenance()
+  +trackLocation()
+}
+
+class Driver {
+  -driverID String
+  -name String
+  -license String
+  +assignToVehicle()
+}
+
+class Maintenance {
+  -maintenanceID String
+  -date Date
+  -description String
+  +logMaintenance()
+}
+
+class FuelReport {
+  -reportID String
+  -date Date
+  -fuelConsumed Float
+  +generateReport()
+}
+
+class Report {
+  -reportID String
+  -reportType String
+  +viewDetails()
+}
+
+class GPS {
+  -gpsID String
+  -coordinates String
+  +sendLocationData()
+}
+
+FleetManager 1 --  Vehicle  manages
+FleetManager 1 --  Driver  assigns
+FleetManager 1 --  Report  generates
+Vehicle 1 -- 1 Driver  operatedBy
+Vehicle 1 --  Maintenance  requires
+Vehicle 1 --  FuelReport  generates
+Vehicle 1 -- 1 GPS  uses
+Maintenance 1 --  FuelReport  logs

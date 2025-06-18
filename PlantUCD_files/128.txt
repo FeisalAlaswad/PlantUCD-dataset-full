@@ -1,0 +1,53 @@
+class NetworkScanner {
+  +startScan(): void
+  +stopScan(): void
+}
+
+class NetworkDevice {
+  +getDeviceInfo(): String
+  +checkVulnerability(): Boolean
+}
+NetworkScanner --> NetworkDevice : scans
+
+class VulnerabilityDatabase {
+  +fetchKnownVulnerabilities(): List<String>
+}
+NetworkScanner --> VulnerabilityDatabase : queries
+
+class VulnerabilityReport {
+  +generateReport(): String
+  +addDeviceInfo(device: NetworkDevice): void
+}
+NetworkScanner --> VulnerabilityReport : generates
+
+class ScanConfiguration {
+  +setScanParameters(): void
+  +getScanSettings(): String
+}
+NetworkScanner --> ScanConfiguration : uses
+
+class UserInterface {
+  +displayScanResults(report: VulnerabilityReport): void
+  +startScan(scanConfig: ScanConfiguration): void
+}
+UserInterface --> NetworkScanner : controls
+
+class NotificationSystem {
+  +sendNotification(message: String): void
+}
+UserInterface --> NotificationSystem : triggers
+
+class ScanScheduler {
+  +scheduleScan(scanConfig: ScanConfiguration): void
+}
+ScanScheduler --> NetworkScanner : schedules
+
+class ScanHistory {
+  +getScanHistory(): List<VulnerabilityReport>
+}
+NetworkScanner --> ScanHistory : stores
+
+class AccessControl {
+  +authorizeUser(role: String): Boolean
+}
+UserInterface --> AccessControl : checks

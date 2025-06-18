@@ -1,0 +1,98 @@
+@startuml
+
+class User {
+    +userID: int
+    +name: string
+    +email: string
+    +role: string
+    +register(): void
+    +login(): void
+    +updateProfile(): void
+}
+
+class Admin {
+    +adminID: int
+    +manageUsers(): void
+}
+
+User <|-- Admin
+
+class ResearchProject {
+    +projectID: int
+    +title: string
+    +description: string
+    +deadline: Date
+    +createProject(): void
+    +updateProject(): void
+}
+
+User "1" *-- "*" ResearchProject : manages
+
+class Researcher {
+    +researcherID: int
+    +assignRole(role: string): void
+}
+
+ResearchProject "1" *-- "*" Researcher : collaborates
+
+class Document {
+    +documentID: int
+    +fileName: string
+    +upload(): void
+    +download(): void
+}
+
+ResearchProject "1" *-- "*" Document : has
+
+class Task {
+    +taskID: int
+    +description: string
+    +deadline: Date
+    +status: string
+    +assignTask(researcher: Researcher): void
+}
+
+ResearchProject "1" *-- "*" Task : includes
+Researcher "1" *-- "*" Task : assigned to
+
+class Report {
+    +reportID: int
+    +generateReport(): void
+}
+
+ResearchProject "1" *-- "*" Report : generates
+
+class Notification {
+    +notificationID: int
+    +message: string
+    +sendNotification(): void
+}
+
+Researcher "1" *-- "*" Notification : receives
+
+class Funding {
+    +fundingID: int
+    +amount: float
+    +allocateFunds(): void
+}
+
+ResearchProject "1" *-- "*" Funding : receives
+
+class AccessControl {
+    +userID: int
+    +level: string
+    +setAccessLevel(level: string): void
+}
+
+User "1" *-- "*" AccessControl : has
+
+class AuditLog {
+    +logID: int
+    +action: string
+    +timestamp: Date
+    +recordAction(): void
+}
+
+ResearchProject "1" *-- "*" AuditLog : logs
+
+@enduml

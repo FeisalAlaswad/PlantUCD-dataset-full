@@ -1,0 +1,92 @@
+@startuml
+
+' User and Role management
+class User {
+  +role: String
+  +accessLevel: Integer
+}
+
+class Role {
+  +name: String
+  +description: String
+}
+
+User "1" *-- "1..*" Role : "has"
+
+' Filtering rule configuration
+class Admin {
+  +configureRules()
+}
+
+class FilteringRule {
+  +criteria: String
+  +type: String
+}
+
+Admin "1" *-- "1..*" FilteringRule : "configures"
+User "1" *-- "1..*" FilteringRule : "applies"
+
+' Logging activities
+class Log {
+  +timestamp: Date
+  +activity: String
+}
+
+User "1" *-- "0..*" Log : "generates"
+
+' Real-time content analysis
+class ContentAnalyzer {
+  +analyzeContent()
+}
+
+class Content {
+  +data: String
+}
+
+ContentAnalyzer "1" *-- "1..*" Content : "analyzes"
+
+' Customizable exceptions
+class Exception {
+  +userID: String
+  +ruleID: String
+}
+
+Admin "1" *-- "1..*" Exception : "manages"
+
+' Integration with external APIs
+class ExternalAPI {
+  +fetchBlacklist()
+}
+
+class DynamicFilter {
+  +updateRules()
+}
+
+DynamicFilter "1" *-- "1..*" ExternalAPI : "integrates with"
+
+' Scheduled filtering
+class Schedule {
+  +startTime: Time
+  +endTime: Time
+}
+
+FilteringRule "1" *-- "1" Schedule : "associated with"
+
+' User feedback mechanism
+class Feedback {
+  +contentID: String
+  +message: String
+}
+
+User "1" *-- "0..*" Feedback : "submits"
+
+' Generating reports
+class Report {
+  +reportType: String
+  +generate()
+}
+
+Admin "1" *-- "1..*" Report : "reviews"
+Log "1..*" *-- "1" Report : "summarized in"
+
+@enduml

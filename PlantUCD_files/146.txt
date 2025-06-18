@@ -1,0 +1,76 @@
+@startuml
+class Robot {
+  +initializeComponents(): void
+  +getStatus(): String
+}
+
+class Sensor {
+  +initialize(): void
+}
+
+class Actuator {
+  +initialize(): void
+}
+
+Robot --> Sensor : has
+Robot --> Actuator : has
+
+class MovementController {
+  +moveForward(): void
+  +moveBackward(): void
+  +rotate(): void
+}
+
+Robot --> MovementController : controls
+
+class PathPlanner {
+  +calculatePath(start: Point, destination: Point): Path
+}
+
+Robot --> PathPlanner : uses
+
+class ObstacleDetector {
+  +detectObstacles(): List<Obstacle>
+}
+
+Robot --> ObstacleDetector : uses
+
+class TaskExecutor {
+  +executeTask(task: Task): void
+}
+
+Robot --> TaskExecutor : uses
+
+class SensorDataProcessor {
+  +processData(sensorData: SensorData): void
+}
+
+Sensor --> SensorDataProcessor : processes
+
+class CommunicationInterface {
+  +sendData(data: String): void
+  +receiveData(): String
+}
+
+Robot --> CommunicationInterface : uses
+
+class EnergyManager {
+  +monitorBatteryLevel(): int
+  +managePowerUsage(): void
+}
+
+Robot --> EnergyManager : uses
+
+class AutonomousSystem {
+  +makeDecision(sensorData: SensorData): void
+}
+
+Robot --> AutonomousSystem : uses
+
+class ErrorHandler {
+  +detectError(): Boolean
+  +handleError(): void
+}
+
+Robot --> ErrorHandler : uses
+@enduml

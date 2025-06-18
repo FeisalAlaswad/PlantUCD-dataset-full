@@ -1,0 +1,70 @@
+@startUML
+class User {
+    + name: String
+    + email: String
+    + password: String
+    + contactNumber: String
+    + register()
+    + login()
+}
+
+class Flight {
+    + flightNumber: String
+    + origin: String
+    + destination: String
+    + departureTime: DateTime
+    + arrivalTime: DateTime
+    + price: Double
+    + addFlight()
+    + updateFlight()
+    + deleteFlight()
+}
+
+class Seat {
+    + seatNumber: String
+    + seatClass: String
+    + isAvailable: Boolean
+    + assignSeat()
+}
+
+class Booking {
+    + bookingId: String
+    + flight: Flight
+    + user: User
+    + seat: Seat
+    + bookingDate: DateTime
+    + makeBooking()
+    + cancelBooking()
+}
+
+class Payment {
+    + paymentId: String
+    + booking: Booking
+    + amount: Double
+    + paymentMethod: String
+    + paymentDate: DateTime
+    + makePayment()
+}
+
+class Cancellation {
+    + cancellationId: String
+    + booking: Booking
+    + cancellationDate: DateTime
+    + refundAmount: Double
+    + cancelBooking()
+    + calculateRefund()
+}
+
+class Report {
+    + generateBookingReport()
+    + generatePaymentReport()
+    + generateCancellationReport()
+}
+
+Flight --> Seat : contains
+User --> Booking : "makes"
+Flight --> Booking : "has"
+Seat --> Booking : "is assigned"
+Booking --> Payment : "is paid by"
+Booking --> Cancellation : "is canceled by"
+@endUML

@@ -1,0 +1,67 @@
+@startUML
+class TextInput {
+    +processPlainText()
+    +processPDF()
+    +processDOCX()
+}
+
+class VoiceSettings {
+    +setVoiceType(type: String)
+    +adjustPitch(level: Float)
+    +adjustSpeed(level: Float)
+}
+
+class AudioOutput {
+    +generateAudio(text: String)
+    +playAudio()
+}
+
+class AudioFile {
+    +saveToFile(format: String)
+}
+
+class LanguageSupport {
+    +setLanguage(language: String)
+}
+
+class PlaybackControl {
+    +pauseAudio()
+    +resumeAudio()
+}
+
+class RealTimePlayback {
+    +readTextAloud(input: String)
+}
+
+class ErrorHandling {
+    +validateInput(input: String)
+    +showError(message: String)
+}
+
+class UserProfile {
+    +savePreferences()
+    +loadPreferences()
+}
+
+class UserAuthentication {
+    +login(username: String, password: String)
+    +register(username: String, password: String)
+}
+
+class ThirdPartyAPI {
+    +integrateAPI(apiName: String)
+    +fetchVoiceData()
+}
+
+TextInput --> VoiceSettings : "Uses"
+VoiceSettings --> AudioOutput : "Configures"
+AudioOutput --> AudioFile : "Exports"
+TextInput --> LanguageSupport : "Depends on"
+AudioOutput --> PlaybackControl : "Manages"
+TextInput --> RealTimePlayback : "Supports"
+TextInput --> ErrorHandling : "Validates"
+UserAuthentication --> UserProfile : "Manages"
+VoiceSettings --> UserProfile : "Stores"
+LanguageSupport --> UserProfile : "Linked to"
+AudioOutput --> ThirdPartyAPI : "Uses"
+@endUML

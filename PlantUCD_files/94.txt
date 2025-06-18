@@ -1,0 +1,71 @@
+@startuml
+class Visitor {
+  +String visitorID
+  +String name
+  +String purpose
+  +DateTime registrationDate
+}
+
+class Host {
+  +String hostID
+  +String name
+  +String department
+}
+
+class Visit {
+  +String visitID
+  +DateTime visitDate
+  +String visitPurpose
+}
+
+class VisitDuration {
+  +DateTime entryTime
+  +DateTime exitTime
+  +int duration
+}
+
+class Security {
+  +String clearanceStatus
+  +boolean isBackgroundCheckComplete
+}
+
+class AccessPass {
+  +String passID
+  +DateTime issuedTime
+  +boolean isReturned
+}
+
+class VisitorHistory {
+  +String historyID
+  +DateTime visitDate
+  +String visitDetails
+}
+
+class VisitPurpose {
+  +String purposeType
+  +String description
+}
+
+class FacilityAccess {
+  +String facilityID
+  +boolean isAccessAllowed
+}
+
+class Notification {
+  +String notificationID
+  +DateTime notificationTime
+  +String message
+}
+
+Visitor "1" -- "0..*" Visit : registers >
+Host "1" -- "0..*" Visitor : assigns >
+Reception "1" -- "0..*" Visitor : checks in >
+Visit "1" -- "1" VisitDuration : has >
+Security "1" -- "1" Visitor : checks clearance >
+Visitor "1" -- "0..1" AccessPass : uses >
+Visitor "1" -- "0..*" VisitorHistory : has >
+Visit "1" -- "1" VisitPurpose : verifies >
+FacilityAccess "1" -- "1" Visitor : grants access >
+Notification "1" -- "1" Host : sends >
+Notification "1" -- "1" Visitor : sends >
+@enduml

@@ -1,0 +1,62 @@
+@startuml
+class User {
+    +id: String
+    +name: String
+    +email: String
+    +role: UserRole
+    +createAccount(): void
+    +deleteAccount(): void
+}
+
+enum UserRole {
+    Administrator
+    Developer
+    Tester
+}
+
+class Bug {
+    +id: String
+    +title: String
+    +description: String
+    +severity: Severity
+    +priority: Priority
+    +reporter: User
+    +state: BugState
+    +reportBug(): void
+    +transitionState(newState: BugState): void
+}
+
+enum Severity {
+    Critical
+    High
+    Medium
+    Low
+}
+
+enum Priority {
+    High
+    Medium
+    Low
+}
+
+enum BugState {
+    New
+    InProgress
+    Resolved
+    Closed
+}
+
+class Comment {
+    +id: String
+    +author: User
+    +timestamp: Date
+    +text: String
+    +addComment(): void
+}
+
+User "1" --> "0..*" Bug : "reported by"
+User "1" --> "0..*" Bug : "assigned to"
+Bug "1" --> "1" User : "assigned by"
+Bug "1" --> "0..*" Comment
+Comment "1" --> "1" User : "authored by"
+@enduml

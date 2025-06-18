@@ -1,0 +1,55 @@
+@startuml
+class User {
+    + userId: String
+    + name: String
+    + email: String
+}
+
+class Admin {
+    + createProject()
+    + assignTask()
+}
+
+class RegularUser {
+    + viewTask()
+    + updateTask()
+}
+
+class Task {
+    + taskId: String
+    + title: String
+    + description: String
+    + deadline: Date
+    + status: String
+    + assignTo(user: User)
+}
+
+class Project {
+    + projectId: String
+    + name: String
+    + description: String
+    + tasks: List<Task>
+}
+
+class Notification {
+    + notificationId: String
+    + message: String
+    + timestamp: Date
+    + sendTo(user: User)
+}
+
+class Report {
+    + reportId: String
+    + generateReport(project: Project)
+}
+
+User <|-- Admin
+User <|-- RegularUser
+User "1" <-- "0..*" Task
+User "1" <-- "0..*" Notification
+Admin "1" --> "0..*" Project
+Admin "1" --> "0..*" Report
+Project "1" *-- "0..*" Task
+Project "1" --> "0..*" Report
+Task "1" --> "0..*" Notification
+@enduml

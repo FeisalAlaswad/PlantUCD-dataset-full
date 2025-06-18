@@ -1,0 +1,83 @@
+@startuml
+class User {
+  +username: String
+  +password: String
+  +authenticate(): Boolean
+}
+
+class ForensicInvestigator {
+  +investigatorId: String
+  +accessLevel: String
+}
+
+User "1" -- "1..*" ForensicInvestigator : Authenticates
+
+class DigitalEvidence {
+  +evidenceId: String
+  +deviceType: String
+  +dataCollected(): Boolean
+}
+
+class StorageDevice {
+  +deviceId: String
+  +deviceName: String
+}
+
+StorageDevice "1" -- "0..*" DigitalEvidence : Collects
+
+class EvidencePreservation {
+  +preserve(): Boolean
+}
+
+DigitalEvidence "1" -- "1" EvidencePreservation : Preserved by
+
+class AnalysisTool {
+  +toolName: String
+  +analyze(data: DigitalEvidence): String
+}
+
+AnalysisTool "1" -- "0..*" DigitalEvidence : Analyzes
+
+class Report {
+  +reportId: String
+  +generate(): String
+}
+
+AnalysisTool "1" -- "0..*" Report : Generates
+
+class ChainOfCustody {
+  +timestamp: String
+  +action: String
+}
+
+DigitalEvidence "1" -- "1..*" ChainOfCustody : Tracks
+
+class SearchEngine {
+  +search(query: String): DigitalEvidence
+}
+
+SearchEngine "1" -- "0..*" DigitalEvidence : Searches
+
+class IntegrityCheck {
+  +calculateHash(data: DigitalEvidence): String
+  +compareHash(evidence: DigitalEvidence): Boolean
+}
+
+IntegrityCheck "1" -- "1..*" DigitalEvidence : Verifies integrity of
+
+class Role {
+  +roleName: String
+  +permissions: String
+}
+
+User "1" -- "1..*" Role : Assigned to
+
+class AuditLog {
+  +logId: String
+  +action: String
+  +timestamp: String
+}
+
+AuditLog "1..*" -- "1" User : Logged by
+
+@enduml
