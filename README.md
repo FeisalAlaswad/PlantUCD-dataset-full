@@ -11,31 +11,53 @@ PlantUCD_dataset is a comprehensive collection of PlantUML code paired with corr
 ## Structure of a Record
 Each record in the dataset includes the following fields:
 
-| Field         | Description                                                                                  |
-|---------------|----------------------------------------------------------------------------------------------|
-| `HumanLang`   | Software requirement written in natural language.                                            |
-| `PlantUML`    | Snippet of PlantUML code that fulfills the software requirement described in `HumanLang`.     |
-| `Model`       | Indicates the class diagram model that the software requirement and code belong to.           |
-| `Image`       | File name of the full class diagram image associated with the PlantUML code.                  |
-| `FullCode`    | File name of the complete PlantUML code for the full class diagram.                           |
+| Field              | Description                                                                                   |
+|--------------------|-----------------------------------------------------------------------------------------------|
+| `HumanLang`        | Software requirement written in natural language.                                             |
+| `PlantUML`         | Snippet of PlantUML code that fulfills the requirement described in `HumanLang`.              |
+| `Model`            | Identifier of the class diagram model the requirement belongs to.                             |
+| `RequirementIndex` | Index of the requirement within the associated model.                                         |
+| `Output_AST`       | JSON representation of the class diagram structure as an Abstract Syntax Tree (AST).         |
 
 ### Example Record
 ```json
 {
-    "HumanLang": "each bank is defined by a unique code and address",
-    "PlantUML": "class Bank{ address }, class Bank{ code }",
-    "Model": "C1",
-    "Image": "1.png",
-    "FullCode": "1.txt"
-}
-```
+  "HumanLang": "A bank is uniquely identified by its code and physical location.",
+  "PlantUML": "class Bank { address }\nclass Bank { bankCode }",
+  "Model": "A1",
+  "RequirementIndex": "0",
+  "Output_AST": {
+    "type": "root",
+    "children": [
+      {
+        "type": "class",
+        "value": "Bank",
+        "children": [
+          {
+            "type": "attribute",
+            "value": "address",
+            "visibility": ""
+          },
+          {
+            "type": "attribute",
+            "value": "bankCode",
+            "visibility": ""
+          }
+        ]
+      }
+    ]
+  }
+}```
+
 
 ### Explanation of Fields
-- **`HumanLang`:** Provides the natural language software requirement for the record.
-- **`PlantUML`:** A snippet of PlantUML code that models the software requirement in `HumanLang`.
-- **`Model`:** Identifies the class diagram model category for the software requirement and code.
-- **`Image`:** Links to the PNG image file of the complete class diagram.
-- **`FullCode`:** Links to the text file containing the full PlantUML code for the class diagram.
+
+- **`HumanLang`**: Natural language description of a software requirement.
+- **`PlantUML`**: PlantUML code modeling the entities or relations described in `HumanLang`.
+- **`Model`**: Identifier of the class diagram model (e.g., A1, B2).
+- **`RequirementIndex`**: Numeric index indicating the order or position of the requirement within the model.
+- **`Output_AST`**: JSON Abstract Syntax Tree representing the structure of the class diagram extracted from the PlantUML code.
+
 
 ## Usage
 This dataset is intended for use in:
