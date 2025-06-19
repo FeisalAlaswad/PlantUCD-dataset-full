@@ -48,7 +48,7 @@ Each record in the dataset includes the following fields:
     ]
   }
 }
-
+```
 
 ### Explanation of Fields
 
