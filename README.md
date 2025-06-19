@@ -6,7 +6,6 @@ PlantUCD_dataset is a comprehensive collection of PlantUML code paired with corr
 ## Dataset Overview
 - **File Format:**
   - JSON file containing all dataset records.
-  - Supporting files include `.txt` (PlantUML full code), `.png` (class diagram images).
 
 ## Structure of a Record
 Each record in the dataset includes the following fields:
