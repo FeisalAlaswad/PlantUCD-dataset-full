@@ -91,11 +91,11 @@ for their invaluable support throughout this research.
 We extend our heartfelt gratitude to:  
 - **Prof. Amer Bouchi**  
 - **Prof. Hazem Issa**  
-- **Prof. Omer Alger**  
 - **Mr. Mohammad Aljaddouh**  
 - **Mrs. Fatina Alhamwi**  
 - **Mr. Firas Zeineddine**  
 - **Mrs. Batoul Aljaddouh**  
 
 for their invaluable contributions.
+
 
