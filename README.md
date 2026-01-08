@@ -69,14 +69,10 @@ If you use this work or dataset in academic research, please cite it as follows:
 Not yet....
 ```bibtex
 @article{Alaswad_TransformerUML,
-  title   = {Transformer-Based Structured Translation for Automated UML Class Diagram Generation from Natural Language},
-  author  = {Alaswad, Feisal and Poovammal, E. and Ramana, Kadiyala and Narayana, Surya G. and Singh, Saurabh and Ra, In-Ho},
-  journal = {IEEE Access},
-  year    = {20XX},
-  volume  = {XX},
-  number  = {XX},
-  pages   = {XX--XX},
-  doi     = {10.XXXX/XXXXXX}
+  title   = {PLANTUCD: A DATASET OF SOFTWARE REQUIREMENTS AND CORRESPONDING PLANTUML-BASED CLASS DIAGRAMS},
+  author  = {Alaswad, Feisal and Poovammal, E and Aljaddouh, Batoul},
+  journal = {Techrxiv},
+  year    = {2026},
 }
 
 ```
@@ -115,6 +111,7 @@ We extend our heartfelt gratitude to:
 - **Mrs. Batoul Aljaddouh**  
 
 for their invaluable contributions.
+
 
 
 
