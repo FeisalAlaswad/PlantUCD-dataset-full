@@ -69,10 +69,13 @@ If you use this work or dataset in academic research, please cite it as follows:
 Not yet....
 ```bibtex
 @article{Alaswad_TransformerUML,
-  title   = {PLANTUCD: A DATASET OF SOFTWARE REQUIREMENTS AND CORRESPONDING PLANTUML-BASED CLASS DIAGRAMS},
+  title   = {PLANTUCD: A Dataset of Software Requirements and Corresponding PlantUML-Based Class Diagrams},
   author  = {Alaswad, Feisal and Poovammal, E and Aljaddouh, Batoul},
-  journal = {Techrxiv},
-  year    = {2026},
+  journal      = {TechRxiv},
+  year         = {2026},
+  doi          = {10.36227/techrxiv.176772833.35984408/v1},
+  url          = {https://doi.org/10.36227/techrxiv.176772833.35984408/v1},
+  note         = {Preprint, posted Jan 06 2026}
 }
 
 ```
@@ -111,6 +114,7 @@ We extend our heartfelt gratitude to:
 - **Mrs. Batoul Aljaddouh**  
 
 for their invaluable contributions.
+
 
 
 
