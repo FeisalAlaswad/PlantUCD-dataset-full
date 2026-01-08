@@ -64,6 +64,24 @@ This dataset is intended for use in:
 - Automated generation and analysis of class diagrams.
 - Understanding the correlation between software requirements and modeling tools.
 
+## Citation
+If you use this work or dataset in academic research, please cite it as follows:
+Not yet....
+```bibtex
+@article{Alaswad_TransformerUML,
+  title   = {Transformer-Based Structured Translation for Automated UML Class Diagram Generation from Natural Language},
+  author  = {Alaswad, Feisal and Poovammal, E. and Ramana, Kadiyala and Narayana, Surya G. and Singh, Saurabh and Ra, In-Ho},
+  journal = {IEEE Access},
+  year    = {20XX},
+  volume  = {XX},
+  number  = {XX},
+  pages   = {XX--XX},
+  doi     = {10.XXXX/XXXXXX}
+}
+
+```
+
+
 ## How to Access
 1. Clone the repository:
    ```bash
@@ -97,5 +115,6 @@ We extend our heartfelt gratitude to:
 - **Mrs. Batoul Aljaddouh**  
 
 for their invaluable contributions.
+
 
 
