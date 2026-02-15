@@ -20,7 +20,7 @@ If you use this work or dataset in academic research, please cite it as follows:
 If you use this dataset, please cite:
 
 Alaswad, F., *PLANTUCD: A Dataset of Software Requirements and Corresponding PlantUML-Based Class Diagrams*, TechRxiv, 2025.  
-Available at: https://www.techrxiv.org/users/1012792/articles/1372916-plantucd-a-dataset-of-software-requirements-and-corresponding-plantuml-based-class-diagrams [click here](https://www.techrxiv.org/users/1012792/articles/1372916-plantucd-a-dataset-of-software-requirements-and-corresponding-plantuml-based-class-diagrams)
+Available at: https://www.techrxiv.org/users/1012792/articles/1372916-plantucd-a-dataset-of-software-requirements-and-corresponding-plantuml-based-class-diagrams
 
 
 
@@ -122,6 +122,7 @@ We extend our heartfelt gratitude to:
 - **Mrs. Batoul Aljaddouh**  
 
 for their invaluable contributions.
+
 
 
 
