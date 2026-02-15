@@ -1,5 +1,20 @@
 # PlantUCD Dataset
 
+## Citation
+If you use this work or dataset in academic research, please cite it as follows:
+```bibtex
+@article{PLANTUCD_2026,
+  title   = {PLANTUCD: A Dataset of Software Requirements and Corresponding PlantUML-Based Class Diagrams},
+  author  = {Alaswad, Feisal and Poovammal, E and Aljaddouh, Batoul},
+  journal      = {TechRxiv},
+  year         = {2026},
+  doi          = {10.36227/techrxiv.176772833.35984408/v1},
+  url          = {https://doi.org/10.36227/techrxiv.176772833.35984408/v1},
+  note         = {Preprint, posted Jan 06 2026}
+}
+
+```
+
 **Description:**
 PlantUCD_dataset is a comprehensive collection of PlantUML code paired with corresponding software requirements, designed for Neural Machine Translation (NMT) in automatic class diagram modeling.
 
@@ -64,22 +79,6 @@ This dataset is intended for use in:
 - Automated generation and analysis of class diagrams.
 - Understanding the correlation between software requirements and modeling tools.
 
-## Citation
-If you use this work or dataset in academic research, please cite it as follows:
-Not yet....
-```bibtex
-@article{PLANTUCD_2026,
-  title   = {PLANTUCD: A Dataset of Software Requirements and Corresponding PlantUML-Based Class Diagrams},
-  author  = {Alaswad, Feisal and Poovammal, E and Aljaddouh, Batoul},
-  journal      = {TechRxiv},
-  year         = {2026},
-  doi          = {10.36227/techrxiv.176772833.35984408/v1},
-  url          = {https://doi.org/10.36227/techrxiv.176772833.35984408/v1},
-  note         = {Preprint, posted Jan 06 2026}
-}
-
-```
-
 
 ## How to Access
 1. Clone the repository:
@@ -114,6 +113,7 @@ We extend our heartfelt gratitude to:
 - **Mrs. Batoul Aljaddouh**  
 
 for their invaluable contributions.
+
 
 
 
