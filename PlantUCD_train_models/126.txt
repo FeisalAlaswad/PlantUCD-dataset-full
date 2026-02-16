@@ -1,0 +1,115 @@
+@startuml
+
+class BackupScheduler {
+    +scheduleBackup(): void
+    +executeBackup(): void
+}
+
+class BackupData {
+    +storeBackup(): void
+    +retrieveBackup(): void
+}
+
+BackupScheduler -- BackupData : manages
+
+class MonitoringSystem {
+    +monitorHealth(): void
+    +generateAlerts(): void
+}
+
+class Server {
+    +id: int
+    +status: String
+}
+
+MonitoringSystem -- Server : monitors
+
+class RecoveryPlan {
+    +executePlan(): void
+    +validatePlan(): void
+}
+
+class RecoveryStep {
+    +stepDescription: String
+    +executeStep(): void
+}
+
+RecoveryPlan "1" *-- "many" RecoveryStep : includes
+
+class User {
+    +id: int
+    +role: String
+}
+
+class AccessControl {
+    +grantAccess(user: User): void
+    +revokeAccess(user: User): void
+}
+
+User -- AccessControl : manages access
+
+class AlertSystem {
+    +sendAlert(): void
+}
+
+class NotificationChannel {
+    +type: String
+    +send(): void
+}
+
+AlertSystem "1" *-- "many" NotificationChannel : uses
+
+class DataStorage {
+    +location: String
+    +storeData(): void
+}
+
+class RedundancyManager {
+    +ensureRedundancy(): void
+}
+
+RedundancyManager -- DataStorage : manages
+
+class SimulationTest {
+    +runSimulation(): void
+    +validateResults(): void
+}
+
+class Scenario {
+    +description: String
+    +trigger(): void
+}
+
+SimulationTest "1" *-- "many" Scenario : includes
+
+class AuditLog {
+    +logEvent(event: String): void
+    +retrieveLogs(): void
+}
+
+class ComplianceChecker {
+    +validateCompliance(): void
+}
+
+AuditLog -- ComplianceChecker : validates
+
+class EncryptionService {
+    +encrypt(data: String): String
+    +decrypt(data: String): String
+}
+
+BackupData -- EncryptionService : secures
+
+class PostRecoveryVerification {
+    +verifyDataIntegrity(): void
+    +checkFunctionality(): void
+}
+
+class System {
+    +id: int
+    +status: String
+}
+
+PostRecoveryVerification -- System : verifies
+
+@enduml

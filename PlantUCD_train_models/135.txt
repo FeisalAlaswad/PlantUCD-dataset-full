@@ -1,0 +1,109 @@
+@startuml
+
+' User Registration & Authentication
+class User {
+  - userID: int
+  - username: string
+  - email: string
+  - password: string
+  + register(): boolean
+  + login(): boolean
+}
+
+class Session {
+  - sessionID: int
+  - userID: int
+  + startSession(): void
+  + endSession(): void
+}
+
+User "1" --> "0..*" Session : "owns"
+
+' Note Creation
+class Note {
+  - noteID: int
+  - title: string
+  - content: string
+  - creationDate: Date
+  + createNote(): void
+  + editNote(): void
+}
+
+User "1" --> "0..*" Note : "creates"
+
+' Note Categorization
+class Folder {
+  - folderID: int
+  - folderName: string
+  + createFolder(): void
+}
+
+Folder "1" --> "0..*" Note
+
+' Note Tagging
+class Tag {
+  - tagID: int
+  - tagName: string
+  + addTag(): void
+}
+
+Note "1" --> "0..*" Tag : "tagged with"
+
+' Search Functionality
+class Search {
+  + searchByTitle(title: string): List<Note>
+  + searchByContent(content: string): List<Note>
+  + searchByTag(tag: string): List<Note>
+}
+
+Note "0..*" --> "0..*" Search : "searched by"
+
+' Note Sharing
+class Share {
+  - shareID: int
+  - noteID: int
+  - sharedWithUserID: int
+  + shareNote(): void
+}
+
+Note "1" --> "0..*" Share : "shared with"
+User "1" --> "0..*" Share : "shares"
+
+' Note Synchronization
+class Device {
+  - deviceID: int
+  - deviceName: string
+  + syncNotes(): void
+}
+
+User "1" --> "0..*" Device : "syncs with"
+Device "1" --> "0..*" Note : "syncs notes"
+
+' Note Backup
+class CloudStorage {
+  - storageID: int
+  - storageName: string
+  + backupNotes(): void
+}
+
+Note "0..*" --> "1" CloudStorage : "backed up to"
+
+' User Preferences
+class Preferences {
+  - theme: string
+  - notificationsEnabled: boolean
+  + updatePreferences(): void
+}
+
+User "1" --> "0..1" Preferences : "has"
+
+' Note Deletion
+class Trash {
+  - trashID: int
+  + moveToTrash(): void
+  + restoreNote(): void
+}
+
+Note "1" --> "0..1" Trash : "moved to"
+
+@enduml

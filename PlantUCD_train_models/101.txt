@@ -1,0 +1,77 @@
+@startuml
+
+class Job {
+    -jobTitle: String
+    -description: String
+    -qualifications: String
+    -deadline: Date
+}
+
+class Employer {
+    -name: String
+    -email: String
+}
+
+class Candidate {
+    -name: String
+    -email: String
+    -phone: String
+    -resume: String
+}
+
+class Registration {
+    -registrationDate: Date
+}
+
+class Application {
+    -coverLetter: String
+    -applicationDate: Date
+}
+
+class ApplicationStatus {
+    -status: String
+}
+
+class Interview {
+    -dateTime: Date
+    -type: String
+}
+
+class ResumeReview {
+    -comments: String
+    -rating: Integer
+}
+
+class JobSearch {
+    -keyword: String
+    -location: String
+}
+
+class EmployerProfile {
+    -companyName: String
+    -location: String
+}
+
+class JobClosing {
+    -closedDate: Date
+}
+
+class Notification {
+    -message: String
+    -dateTime: Date
+}
+
+Employer "1" -- "0..*" Job : posts
+Candidate "1" -- "1" Registration : registers
+Job "1" -- "0..*" Application : has
+Candidate "1" -- "0..*" Application : applies
+Application "1" -- "1" ApplicationStatus : has
+Application "1" -- "1" Interview : schedules
+Application "1" -- "1" ResumeReview : has
+JobSearch "1" -- "0..*" Job : searches
+Employer "1" -- "1" EmployerProfile : manages
+Job "1" -- "1" JobClosing : closes
+Application "1" -- "0..*" Notification : generates
+Candidate "1" -- "0..*" Notification : receives
+
+@enduml

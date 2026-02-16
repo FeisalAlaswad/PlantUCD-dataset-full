@@ -1,0 +1,67 @@
+@startuml
+
+class GiveawayPost {
+  - postId: String
+  - postText: String
+  - postDate: DateTime
+  + getPostDetails(): String
+}
+
+class User {
+  - userId: String
+  - userName: String
+  - userProfile: String
+  + getUserDetails(): String
+}
+
+class Comment {
+  - commentId: String
+  - commentText: String
+  - commentDate: DateTime
+  + getCommentDetails(): String
+}
+
+class Like {
+  - likeId: String
+  - likeDate: DateTime
+  + getLikeDetails(): String
+}
+
+class GiveawayManager {
+  + pickRandomWinnerFromComments(giveawayPost: GiveawayPost): User
+  + pickRandomWinnerFromLikes(giveawayPost: GiveawayPost): User
+  + validateWinner(user: User, giveawayPost: GiveawayPost): Boolean
+}
+
+class Notification {
+  - notificationId: String
+  - message: String
+  - notificationDate: DateTime
+  + sendNotification(): void
+}
+
+class GiveawayResult {
+  - resultId: String
+  - winner: User
+  - giveawayPost: GiveawayPost
+  + getWinnerDetails(): String
+}
+
+' Relationships
+GiveawayPost "1" -- "*" Comment : has
+GiveawayPost "1" -- "*" Like : has
+
+User "1" -- "*" Comment : comments
+User "1" -- "*" Like : likes
+
+GiveawayManager ..> GiveawayPost
+GiveawayManager ..> User
+GiveawayManager ..> Comment
+GiveawayManager ..> Like
+
+GiveawayResult --> User
+GiveawayResult --> GiveawayPost
+
+Notification ..> User
+
+@enduml

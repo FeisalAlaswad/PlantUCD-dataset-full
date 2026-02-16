@@ -1,0 +1,82 @@
+@startUML
+class User {
+    +createObject()
+    +editObject()
+    +deleteObject()
+}
+
+class Object3D {
+    +name: String
+    +properties: Map<String, Any>
+}
+
+class Cube
+class Sphere
+class Cylinder
+
+class Collection {
+    +name: String
+    +objects: List<Object3D>
+    +addObject(Object3D)
+    +removeObject(Object3D)
+}
+
+class TransformTool {
+    +translate(x: Float, y: Float, z: Float)
+    +rotate(axis: String, angle: Float)
+    +scale(factor: Float)
+}
+
+class Material {
+    +name: String
+    +color: String
+    +texture: String
+}
+
+class SceneGraph {
+    +addChild(Object3D)
+    +removeChild(Object3D)
+}
+
+class Action {
+    +execute()
+    +undo()
+    +redo()
+}
+
+class UndoRedoManager {
+    +actions: List<Action>
+    +undo()
+    +redo()
+}
+
+class Exporter {
+    +export(scene: SceneGraph, format: String)
+}
+
+class Camera {
+    +position: Point
+    +move(x: Float, y: Float, z: Float)
+    +rotate(axis: String, angle: Float)
+}
+
+class Light {
+    +type: String
+    +intensity: Float
+    +position: Point
+}
+
+User --> Object3D : manages
+Object3D <|-- Cube
+Object3D <|-- Sphere
+Object3D <|-- Cylinder
+Collection o-- Object3D : contains
+Object3D <.. TransformTool : uses
+Object3D --> Material : applies
+SceneGraph *-- Object3D : nodes
+User --> UndoRedoManager : interacts
+UndoRedoManager --> Action : manages
+SceneGraph --> Exporter : exports
+SceneGraph --> Camera : controls
+SceneGraph o-- Light : contains
+@endUML

@@ -1,0 +1,89 @@
+@startuml
+
+class User {
+    +string email
+    +string password
+    +signIn()
+    +createMeeting()
+    +startVideo()
+    +startAudio()
+    +assignRole()
+    +shareScreen()
+    +sendText()
+    +receiveText()
+    +accessRecording()
+    +scheduleMeeting()
+    +receiveInvite()
+}
+
+class ThirdPartyAuth {
+    +signInWithGoogle()
+    +signInWithFacebook()
+}
+
+class Meeting {
+    +string meetingID
+    +string date
+    +string time
+    +addParticipant()
+    +removeParticipant()
+    +startRecording()
+    +stopRecording()
+    +sendInvite()
+    +scheduleMeeting()
+    +createBreakoutRoom()
+}
+
+class Participant {
+    +string name
+    +bool isMuted
+}
+
+class VideoStream {
+    +startStream()
+    +stopStream()
+}
+
+class AudioStream {
+    +startStream()
+    +stopStream()
+}
+
+class ScreenShare {
+    +startSharing()
+    +stopSharing()
+}
+
+class Chat {
+    +sendMessage()
+    +receiveMessage()
+}
+
+class Recording {
+    +saveRecording()
+}
+
+class BreakoutRoom {
+    +string roomID
+    +addParticipant()
+}
+
+User --> ThirdPartyAuth : uses
+User --> Meeting : creates
+User --> VideoStream : initiates
+User --> AudioStream : initiates
+User --> ScreenShare : initiates
+User --> Chat : uses
+User --> Recording : views
+User --> BreakoutRoom : participates in
+
+Meeting --> Participant : has
+Meeting --> User : managed by
+Meeting --> Recording : produces
+Meeting --> User : sendsInvite
+Meeting --> User : scheduled by
+
+Meeting --> BreakoutRoom : creates
+BreakoutRoom --> Participant : has
+
+@enduml
