@@ -1,0 +1,66 @@
+@startUML
+class Vehicle {
+  + vehicleNumber: String
+  + type: String
+  + ownerName: String
+}
+
+class Entry {
+  + entryTime: DateTime
+  + assignSlot(): ParkingSlot
+}
+
+class ParkingSlot {
+  + slotId: String
+  + isAvailable: Boolean
+  + assign(): void
+  + release(): void
+}
+
+Vehicle "1" --> Entry
+Entry "1" --> ParkingSlot
+
+class ParkingLot {
+  + slots: List<ParkingSlot>
+  + getAvailableSlots(): List<ParkingSlot>
+  + updateSlotStatus(slotId: String, isAvailable: Boolean): void
+}
+
+ParkingLot "1" --> ParkingSlot
+
+class Payment {
+  + calculateFee(vehicleType: String, duration: Double): Double
+  + processPayment(amount: Double, method: String): Boolean
+}
+
+class PaymentMethod {
+  + methodType: String
+  + validatePayment(): Boolean
+}
+
+Payment "1" --> PaymentMethod
+
+class Exit {
+  + exitTime: DateTime
+  + validatePayment(): Boolean
+  + releaseSlot(slotId: String): void
+}
+
+Exit "1" --> ParkingSlot
+Exit "1" --> Payment
+
+class Report {
+  + generateUsageReport(): String
+  + generateRevenueReport(): String
+  + generateSlotAvailabilityReport(): String
+}
+
+class ParkingStatistics {
+  + totalRevenue: Double
+  + totalVehicles: Integer
+  + averageParkingDuration: Double
+}
+
+Report "1" --> ParkingStatistics
+ParkingStatistics "1" --> ParkingLot
+@endUML

@@ -1,0 +1,71 @@
+@startUML
+class User {
+    +userId: String
+    +name: String
+    +email: String
+    +role: String
+    +create()
+    +update()
+    +delete()
+    +view()
+}
+
+class Admin {
+}
+
+class ProjectManager {
+}
+
+User <|-- Admin
+User <|-- ProjectManager
+
+class Project {
+    +projectId: String
+    +name: String
+    +description: String
+    +startDate: Date
+    +endDate: Date
+    +create()
+    +update()
+    +delete()
+    +view()
+}
+
+Admin "1" -- "many" Project : "manages"
+ProjectManager "1" -- "many" Project : "assigned to"
+
+class Task {
+    +taskId: String
+    +name: String
+    +description: String
+    +startDate: Date
+    +endDate: Date
+    +status: String
+    +priority: String
+    +assign(userId: String)
+}
+
+Project "1" -- "many" Task : "contains"
+User "1" -- "many" Task : "assigned to"
+
+class Resource {
+    +resourceId: String
+    +name: String
+    +type: String
+    +assignToProject(projectId: String)
+}
+
+Project "1" -- "many" Resource : "allocated with"
+
+class TimeLog {
+    +logId: String
+    +taskId: String
+    +userId: String
+    +date: Date
+    +hoursWorked: Float
+    +logTime()
+}
+
+Task "1" -- "many" TimeLog : "logs"
+User "1" -- "many" TimeLog : "creates"
+@endUML

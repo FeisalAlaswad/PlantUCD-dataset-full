@@ -1,0 +1,40 @@
+@startuml
+class Customer {
+    +id: String
+    +name: String
+    +contactInfo: String
+    +financialDetails: String
+}
+
+class LoanApplication {
+    +id: String
+    +loanType: String
+    +amount: Double
+    +status: String
+}
+
+class Staff {
+    +id: String
+    +name: String
+    +role: String
+}
+
+class LoanRepayment {
+    +id: String
+    +dueDate: Date
+    +paymentAmount: Double
+    +outstandingBalance: Double
+}
+
+class Notification {
+    +id: String
+    +message: String
+    +date: Date
+}
+
+Customer "1" -- "0..*" LoanApplication : "submits"
+Staff "1" -- "0..*" LoanApplication : "processes"
+LoanApplication "1" -- "0..*" LoanRepayment : "has"
+Customer "1" -- "0..*" Notification : "receives"
+LoanRepayment "1" -- "0..*" Notification : "triggers"
+@enduml

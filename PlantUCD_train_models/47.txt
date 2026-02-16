@@ -1,0 +1,56 @@
+@startUML
+class Applicant {
+    +name: String
+    +address: String
+    +idProof: String
+    +submitDocuments(): void
+}
+
+class Document {
+    +documentName: String
+    +documentType: String
+    +uploadDate: Date
+}
+
+class LoanApplication {
+    +applicationId: String
+    +loanType: String
+    +amount: Double
+    +tenure: Int
+    +submitApplication(): void
+}
+
+class LoanOfficer {
+    +officerId: String
+    +name: String
+    +reviewApplication(application: LoanApplication): String
+}
+
+class Manager {
+    +managerId: String
+    +name: String
+    +approveApplication(application: LoanApplication): Boolean
+}
+
+class LoanDisbursement {
+    +disbursementId: String
+    +disbursementDate: Date
+    +amount: Double
+    +disburseLoan(): void
+}
+
+class LoanRepayment {
+    +repaymentId: String
+    +dueDate: Date
+    +installmentAmount: Double
+    +paymentStatus: String
+    +makePayment(): void
+}
+
+Applicant "1" -- "0..*" Document
+Applicant "1" -- "0..*" LoanApplication
+LoanApplication "1" -- "1" LoanOfficer
+LoanOfficer "1" -- "0..1" Manager
+LoanApplication "1" -- "1" LoanDisbursement
+LoanDisbursement "1" -- "0..*" LoanRepayment
+@endUML

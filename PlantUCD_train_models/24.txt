@@ -1,0 +1,117 @@
+@startuml
+
+class User {
+  +userId: String
+  +username: String
+  +password: String
+  +roles: List<Role>
+}
+
+class Role {
+  +roleId: String
+  +roleName: String
+  +permissions: List<Permission>
+}
+
+class Permission {
+  +permissionId: String
+  +permissionName: String
+}
+
+User "1" -- "0..*" Role : has
+Role "1" -- "0..*" Permission : grants
+
+
+class Product {
+  +productId: String
+  +productName: String
+  +price: Float
+}
+
+class Warehouse {
+  +warehouseId: String
+  +warehouseName: String
+}
+
+class Stock {
+  +stockId: String
+  +quantity: Integer
+}
+
+Product "1" -- "0..*" Stock : stocked_in
+Warehouse "1" -- "0..*" Stock : contains
+
+
+class Order {
+  +orderId: String
+  +orderDate: DateTime
+  +status: String
+}
+
+class OrderItem {
+  +orderItemId: String
+  +quantity: Integer
+}
+
+class Customer {
+  +customerId: String
+  +customerName: String
+}
+
+Order "1" -- "1..*" OrderItem : contains
+Customer "1" -- "0..*" Order : places
+OrderItem "1" -- "1" Product : includes
+
+
+class Shipment {
+  +shipmentId: String
+  +trackingNumber: String
+  +shipmentDate: DateTime
+}
+
+class ShippingMethod {
+  +methodId: String
+  +methodName: String
+}
+
+Shipment "1" -- "1" Order : ships_for
+Shipment "1" -- "1" ShippingMethod : uses
+
+
+class Supplier {
+  +supplierId: String
+  +supplierName: String
+  +contactInfo: String
+}
+
+Supplier "1" -- "0..*" Product : supplies
+
+
+class PurchaseOrder {
+  +purchaseOrderId: String
+  +orderDate: DateTime
+  +status: String
+}
+
+PurchaseOrder "1" -- "0..*" Product : contains
+PurchaseOrder "1" -- "1" Supplier : created_by
+
+
+class Report {
+  +reportId: String
+  +reportType: String
+  +generationDate: DateTime
+}
+
+class SalesReport {
+  +totalSales: Float
+}
+
+class InventoryReport {
+  +inventoryValue: Float
+}
+
+Report "1" -- "0..1" SalesReport : generates
+Report "1" -- "0..1" InventoryReport : generates
+
+@enduml

@@ -1,0 +1,82 @@
+@startUML
+class User {
+    + id: String
+    + name: String
+    + email: String
+    + password: String
+    + register()
+    + authenticate()
+}
+
+class Customer extends User {
+    + browseRestaurants()
+    + placeOrder()
+}
+
+class DeliveryPerson extends User {
+    + acceptDelivery()
+    + updateDeliveryStatus()
+}
+
+class Restaurant {
+    + id: String
+    + name: String
+    + address: String
+    + manageMenu()
+    + updateAvailability()
+}
+
+class MenuItem {
+    + id: String
+    + name: String
+    + price: Double
+    + availability: Boolean
+}
+
+class Order {
+    + id: String
+    + customerId: String
+    + restaurantId: String
+    + deliveryPersonId: String
+    + status: String
+    + placeOrder()
+    + updateStatus()
+}
+
+class Payment {
+    + id: String
+    + orderId: String
+    + amount: Double
+    + method: String
+    + status: String
+    + processPayment()
+}
+
+class Delivery {
+    + id: String
+    + orderId: String
+    + location: String
+    + estimatedTime: String
+    + updateLocation()
+    + trackOrder()
+}
+
+class Review {
+    + id: String
+    + reviewerId: String
+    + reviewedEntityId: String
+    + rating: Double
+    + comment: String
+    + submitReview()
+}
+
+Restaurant "1" --> "many" MenuItem : manages
+Customer "1" --> "many" Order : places
+Restaurant "1" --> "many" Order : receives
+DeliveryPerson "1" --> "many" Order : delivers
+Order "1" --> "1" Payment : involves
+Order "1" --> "1" Delivery : has
+User "1" --> "many" Review : writes
+Restaurant "1" <-- "many" Review : receives
+DeliveryPerson "1" <-- "many" Review : receives
+@endUML

@@ -1,0 +1,74 @@
+@startuml
+class User {
+  +id: String
+  +name: String
+  +email: String
+  +dateOfBirth: Date
+  +profilePicture: String
+  +register(): void
+  +login(): boolean
+  +updateProfile(): void
+}
+
+class Friendship {
+  +userId1: String
+  +userId2: String
+  +status: String <<enum>> // {Pending, Accepted, Declined}
+  +sendRequest(): void
+  +respondToRequest(): void
+}
+
+class Post {
+  +postId: String
+  +content: String
+  +image: String
+  +timestamp: Date
+  +createPost(): void
+}
+
+class Comment {
+  +commentId: String
+  +content: String
+  +timestamp: Date
+  +addComment(): void
+}
+
+class Like {
+  +likeId: String
+  +timestamp: Date
+}
+
+class Message {
+  +messageId: String
+  +senderId: String
+  +receiverId: String
+  +content: String
+  +timestamp: Date
+  +sendMessage(): void
+}
+
+class Group {
+  +groupId: String
+  +name: String
+  +description: String
+  +addMember(): void
+  +removeMember(): void
+}
+
+class Notification {
+  +notificationId: String
+  +type: String <<enum>> // {FriendRequest, Like, Comment, Message}
+  +timestamp: Date
+  +markAsRead(): void
+}
+
+User "1" -- "0..*" Friendship : has
+User "1" -- "0..*" Post : creates
+Post "1" -- "0..*" Comment : has
+Post "1" -- "0..*" Like : has
+User "1" -- "0..*" Message : sends
+User "1" -- "0..*" Message : receives
+User "1" -- "0..*" Group : joins
+User "1" -- "0..*" Group : creates
+User "1" -- "0..*" Notification : receives
+@enduml

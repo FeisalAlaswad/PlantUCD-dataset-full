@@ -1,0 +1,73 @@
+@startUML
+
+class User {
+    +String name
+    +String email
+    +String phoneNumber
+    +String role
+    +create()
+    +update()
+    +delete()
+}
+
+class Admin
+class Agent
+class Client
+
+User <|-- Admin
+User <|-- Agent
+User <|-- Client
+
+class Property {
+    +String propertyId
+    +String address
+    +Double price
+    +String status
+    +String type
+    +addListing()
+    +updateListing()
+    +removeListing()
+}
+
+Agent "1" --> "many" Property
+
+class Favorite {
+    +Date dateSaved
+}
+
+Client "1" --> "many" Favorite
+Property "1" --> "many" Favorite
+
+class Booking {
+    +String bookingId
+    +Date date
+    +Time time
+    +String status
+    +bookAppointment()
+    +cancelAppointment()
+}
+
+Client "1" --> "many" Booking
+Property "1" --> "many" Booking
+Agent "1" --> "many" Booking
+
+class Transaction {
+    +String transactionId
+    +Double amount
+    +Date date
+    +createTransaction()
+}
+
+Property "1" --> "1" Transaction
+Client "1" --> "many" Transaction : buyer
+Agent "1" --> "many" Transaction : seller
+
+class Report {
+    +generateSalesReport()
+    +generateRevenueReport()
+    +generateAgentPerformance()
+}
+
+Admin "1" --> "many" Report
+
+@endUML

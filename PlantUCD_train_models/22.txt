@@ -1,0 +1,59 @@
+@startuml
+class Customer {
+  - id: String
+  - name: String
+  - email: String
+  - address: String
+  + getInvoices(): List<Invoice>
+}
+
+class Invoice {
+  - id: String
+  - date: Date
+  - totalAmount: Float
+  + getItems(): List<InvoiceItem>
+}
+
+class InvoiceItem {
+  - itemId: String
+  - description: String
+  - quantity: Integer
+  - unitPrice: Float
+  - totalPrice: Float
+}
+
+class Payment {
+  - paymentId: String
+  - paymentMethod: String
+  - amountPaid: Float
+  - paymentDate: Date
+}
+
+class Discount {
+  - discountId: String
+  - discountType: String
+  - value: Float
+  + applyDiscount(invoice: Invoice): Float
+}
+
+class Tax {
+  - taxRate: Float
+  + calculateTax(invoice: Invoice): Float
+}
+
+class Report {
+  - reportId: String
+  - reportType: String
+  - generatedDate: Date
+  + generateReport(): String
+}
+
+Customer "1" -- "0..*" Invoice : has
+Invoice "1" -- "0..*" InvoiceItem : contains
+Invoice "1" -- "1" Customer : belongs_to
+Payment "1" -- "1..*" Invoice : pays_for
+Discount "0..*" -- "1" Invoice : applied_to
+Tax "1" -- "1" Invoice : applies_to
+Report "1" -- "0..*" Invoice : generates
+Report "1" -- "0..*" Payment : includes
+@enduml

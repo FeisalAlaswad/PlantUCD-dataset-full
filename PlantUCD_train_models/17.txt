@@ -1,0 +1,111 @@
+class User {
+  +userId: String
+  +userName: String
+  +email: String
+  +password: String
+}
+
+class Role {
+  +roleId: String
+  +roleName: String
+  +permissions: List<String>
+}
+
+class Permission {
+  +permissionId: String
+  +permissionName: String
+}
+
+User "1" *-- "*" Role : has
+Role "1" *-- "*" Permission : includes
+
+class Product {
+  +productId: String
+  +productName: String
+  +quantity: int
+  +price: double
+}
+
+class Category {
+  +categoryId: String
+  +categoryName: String
+}
+
+class Supplier {
+  +supplierId: String
+  +supplierName: String
+}
+
+Product "1" *-- "*" Category : belongs to
+Product "*" -- "1" Supplier : provided by
+
+class Order {
+  +orderId: String
+  +orderDate: Date
+  +orderStatus: String
+}
+
+class Customer {
+  +customerId: String
+  +customerName: String
+  +contactDetails: String
+}
+
+Order "*" -- "1" Customer : belongs to
+Order "*" -- "*" Product : contains
+
+class Invoice {
+  +invoiceId: String
+  +amount: double
+  +dueDate: Date
+}
+
+class Payment {
+  +paymentId: String
+  +paymentDate: Date
+  +paymentAmount: double
+}
+
+Invoice "1" *-- "*" Payment : has
+Invoice "*" -- "1" Customer : billed to
+
+class Employee {
+  +employeeId: String
+  +employeeName: String
+  +dateOfBirth: Date
+  +salary: double
+}
+
+class Department {
+  +departmentId: String
+  +departmentName: String
+}
+
+class JobPosition {
+  +positionId: String
+  +positionTitle: String
+}
+
+Employee "1" *-- "1" Department : works in
+Employee "*" -- "*" JobPosition : holds
+
+class ProcurementRequest {
+  +requestId: String
+  +requestDate: Date
+  +status: String
+}
+
+class PurchaseOrder {
+  +orderId: String
+  +orderDate: Date
+  +status: String
+}
+
+class PurchaseInvoice {
+  +invoiceId: String
+  +invoiceAmount: double
+  +invoiceDate: Date
+}
+
+ProcurementRequest "1" *-- "*" PurchaseOrder : generates
+PurchaseOrder "1" *-- "1" PurchaseInvoice : results in
