@@ -1,0 +1,176 @@
+@startuml
+
+class EnergyMeter {
+  +meterID: String
+  +location: String
+  +reading: Float
+  +timestamp: DateTime
+  +updateReading(newReading: Float)
+}
+
+class Database {
+  +storeData(data: String)
+  +retrieveData(): String
+}
+
+EnergyMeter --> Database : stores data
+
+class Substation {
+  +substationID: String
+  +status: String
+  +controlSwitch(status: String)
+}
+
+class PowerSource {
+  +sourceID: String
+  +output: Float
+}
+
+Substation --> PowerSource : manages power flow
+
+class ConsumerDevice {
+  +deviceID: String
+  +status: String
+  +adjustConsumption(level: Float)
+}
+
+class PricingSignal {
+  +price: Float
+  +timeSlot: DateTime
+}
+
+ConsumerDevice --> PricingSignal : responds to pricing
+
+class Fault {
+  +faultID: String
+  +location: String
+  +faultType: String
+  +timestamp: DateTime
+}
+
+class DiagnosticSystem {
+  +identifyFault(faultID: String)
+  +sendAlert(faultDetails: String)
+}
+
+Fault --> DiagnosticSystem : triggers diagnostics
+
+class SecuritySystem {
+  +systemID: String
+  +status: String
+  +authenticateUser(userID: String)
+  +monitorActivity(activity: String)
+}
+
+class User {
+  +userID: String
+  +role: String
+}
+
+SecuritySystem --> User : authenticates
+
+class RenewableEnergySource {
+  +sourceID: String
+  +generationCapacity: Float
+}
+
+class GridSystem {
+  +systemID: String
+  +manageEnergyFlow()
+}
+
+RenewableEnergySource --> GridSystem : supplies energy
+
+class EnergyStorage {
+  +storageID: String
+  +capacity: Float
+  +chargeLevel: Float
+  +storeEnergy(amount: Float)
+}
+
+class EnergyGrid {
+  +gridID: String
+  +supplyEnergy(amount: Float)
+}
+
+EnergyStorage --> EnergyGrid : supplies stored energy
+
+class Consumer {
+  +consumerID: String
+  +name: String
+  +usageData: String
+  +generateBill(): Float
+}
+
+class BillingSystem {
+  +generateBill(consumerID: String)
+  +storeBill(bill: Float)
+}
+
+Consumer --> BillingSystem : receives bill
+
+class LoadForecasting {
+  +forecastID: String
+  +forecastData: String
+  +generateForecast(): String
+}
+
+class WeatherSystem {
+  +temperature: Float
+  +humidity: Float
+}
+
+LoadForecasting --> WeatherSystem : uses weather data
+
+class PowerQualityMonitor {
+  +monitorID: String
+  +voltage: Float
+  +frequency: Float
+  +detectIssue(): String
+}
+
+class PowerLine {
+  +lineID: String
+  +status: String
+}
+
+PowerQualityMonitor --> PowerLine : monitors power quality
+
+class Trader {
+  +traderID: String
+  +tradeEnergy(amount: Float, price: Float)
+}
+
+class EnergyMarket {
+  +marketID: String
+  +price: Float
+}
+
+Trader --> EnergyMarket : participates in trading
+
+class Dashboard {
+  +dashboardID: String
+  +displayData(data: String)
+}
+
+class DataSource {
+  +sourceID: String
+  +retrieveData(): String
+}
+
+Dashboard --> DataSource : visualizes data
+
+class CommunicationNetwork {
+  +networkID: String
+  +status: String
+  +sendData(data: String)
+}
+
+class GridComponent {
+  +componentID: String
+  +receiveData(data: String)
+}
+
+CommunicationNetwork --> GridComponent : transfers data
+
+@enduml

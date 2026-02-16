@@ -1,0 +1,108 @@
+@startuml
+class Property {
+    +propertyID: int
+    +address: String
+    +type: String
+    +rentAmount: float
+    +availabilityStatus: boolean
+}
+
+class Tenant {
+    +tenantID: int
+    +name: String
+    +contact: String
+    +email: String
+}
+
+class LeaseAgreement {
+    +leaseID: int
+    +startDate: Date
+    +endDate: Date
+    +terms: String
+}
+
+class Payment {
+    +paymentID: int
+    +date: Date
+    +amount: float
+    +status: String
+}
+
+class MaintenanceRequest {
+    +requestID: int
+    +description: String
+    +status: String
+    +date: Date
+}
+
+class MaintenanceStaff {
+    +staffID: int
+    +name: String
+    +specialization: String
+}
+
+class Inspection {
+    +inspectionID: int
+    +date: Date
+    +notes: String
+}
+
+class Notification {
+    +notificationID: int
+    +type: String
+    +message: String
+    +dateSent: Date
+}
+
+class Report {
+    +reportID: int
+    +type: String
+    +generatedDate: Date
+    +content: String
+}
+
+class UserRole {
+    +roleID: int
+    +roleName: String
+}
+
+class Document {
+    +documentID: int
+    +type: String
+    +filePath: String
+}
+
+class PropertyFilter {
+    +criteria: String
+}
+
+class AuditLog {
+    +logID: int
+    +action: String
+    +timestamp: Date
+}
+
+Admin "1" --> "*" Property : manages
+Property "1" --> "0..1" Tenant : assignedTo
+Property "1" --> "1..*" LeaseAgreement
+Tenant "1" --> "1..*" LeaseAgreement
+LeaseAgreement "1" --> "0..*" Payment : generates
+Tenant "1" --> "*" Payment : makes
+Tenant "1" --> "*" MaintenanceRequest : submits
+Property "1" --> "*" MaintenanceRequest : relatedTo
+MaintenanceRequest "1" --> "1..*" MaintenanceStaff : handledBy
+Property "1" --> "*" Inspection : inspectedBy
+MaintenanceStaff "1" --> "*" Inspection : performs
+Tenant "1" --> "*" Notification : receives
+Admin "1" --> "*" Notification : sends
+Admin "1" --> "*" Report : generates
+Admin "1" --> "1" UserRole : has
+Tenant "1" --> "1" UserRole : has
+MaintenanceStaff "1" --> "1" UserRole : has
+LeaseAgreement "1" --> "*" Document : includes
+MaintenanceRequest "1" --> "*" Document : includes
+Property "1" --> "*" PropertyFilter : matchedBy
+Admin "1" --> "*" AuditLog : performs
+Tenant "1" --> "*" AuditLog : performs
+MaintenanceStaff "1" --> "*" AuditLog : performs
+@enduml

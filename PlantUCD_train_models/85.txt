@@ -1,0 +1,70 @@
+@startUML
+class InventoryItem {
+    +itemID: String
+    +itemName: String
+    +quantity: int
+    +location: String
+}
+class Category {
+    +categoryID: String
+    +categoryName: String
+}
+class Supplier {
+    +supplierID: String
+    +supplierName: String
+    +contactInfo: String
+}
+class StockAlert {
+    +alertID: String
+    +threshold: int
+    +alertMessage: String
+}
+class Transaction {
+    +transactionID: String
+    +transactionType: String
+    +quantityChanged: int
+    +transactionDate: Date
+}
+class Warehouse {
+    +warehouseID: String
+    +warehouseName: String
+    +address: String
+}
+class Report {
+    +reportID: String
+    +reportDate: Date
+    +details: String
+}
+class User {
+    +userID: String
+    +username: String
+    +role: String
+}
+class Role {
+    +roleID: String
+    +roleName: String
+}
+class BatchOperation {
+    +batchID: String
+    +operationType: String
+    +date: Date
+}
+class AuditLog {
+    +logID: String
+    +action: String
+    +timestamp: Date
+    +userID: String
+}
+
+InventoryItem --> Category : "belongs to"
+Supplier --> InventoryItem : "supplies"
+InventoryItem --> StockAlert : "has"
+InventoryItem --> Transaction : "tracked by"
+InventoryItem --> Warehouse : "stored in"
+InventoryItem --> Report : "included in"
+User --> Role : "has"
+Role --> InventoryItem : "manages"
+BatchOperation --> InventoryItem : "updates"
+AuditLog --> InventoryItem : "records"
+AuditLog --> User : "performed by"
+@endUML

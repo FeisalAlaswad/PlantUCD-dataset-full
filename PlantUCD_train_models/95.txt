@@ -1,0 +1,107 @@
+@startuml
+class Student {
+    +studentID: String
+    +name: String
+    +email: String
+    +register(course: Course): void
+}
+
+class Course {
+    +courseID: String
+    +courseName: String
+    +capacity: int
+    +enrolled: int
+    +checkAvailability(): boolean
+}
+
+Student "1" -- "0..*" Course : registers
+
+class Course {
+    +courseID: String
+    +courseName: String
+    +capacity: int
+    +enrolled: int
+    +checkAvailability(): boolean
+}
+
+Course "1" -- "*" Student : has_enrolled_students
+
+class Course {
+    +courseID: String
+    +courseName: String
+    +prerequisites: List<Course>
+    +checkPrerequisites(student: Student): boolean
+}
+
+Course "1" -- "*" Course : has_prerequisites
+
+class Course {
+    +schedule: String
+    +location: String
+    +setSchedule(schedule: String, location: String): void
+}
+
+class Faculty {
+    +facultyID: String
+    +name: String
+    +assignCourse(course: Course): void
+}
+
+Faculty "1" -- "*" Course : teaches
+
+class Faculty {
+    +facultyID: String
+    +name: String
+    +assignCourse(course: Course): void
+}
+
+Faculty "1" -- "*" Course : teaches
+
+class Student {
+    +dropCourse(course: Course): void
+}
+
+Student "1" -- "*" Course : drops
+
+class Grade {
+    +grade: String
+    +student: Student
+    +course: Course
+    +assignGrade(grade: String): void
+}
+
+Grade "1" -- "1" Student : tracks
+Grade "1" -- "1" Course : belongs_to
+
+class EnrollmentHistory {
+    +enrollmentDate: Date
+    +student: Student
+    +course: Course
+}
+
+EnrollmentHistory "1" -- "1" Student : for
+EnrollmentHistory "1" -- "1" Course : includes
+
+class Course {
+    +courseID: String
+    +courseName: String
+    +department: String
+    +prerequisites: List<Course>
+    +availableSlots: int
+}
+
+class Search {
+    +searchByName(name: String): List<Course>
+    +filterByDepartment(department: String): List<Course>
+}
+
+Course "1" -- "*" Course : related_to
+
+class Course {
+    +registrationDeadline: Date
+    +isRegistrationOpen(): boolean
+}
+
+Course "1" -- "*" Student : registration_closes
+
+@enduml

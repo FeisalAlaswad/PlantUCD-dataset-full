@@ -1,0 +1,74 @@
+@startuml
+
+class WeatherStation {
+  +collectData(): WeatherData
+  +updateData(weatherData: WeatherData)
+}
+
+class WeatherData {
+  +temperature: float
+  +humidity: float
+  +windSpeed: float
+}
+
+class Database {
+  +storeData(weatherData: WeatherData)
+  +retrieveData(): WeatherData
+}
+
+class Display {
+  +showWeatherData(weatherData: WeatherData)
+}
+
+class UserInterface {
+  +showDashboard(): void
+}
+
+class WeatherAlert {
+  +triggerAlert(): void
+  +getAlertDetails(): String
+}
+
+class Report {
+  +generateReport(): String
+  +displayReport(): void
+}
+
+class Sensor {
+  +calibrate(): void
+}
+
+class Forecast {
+  +predictWeather(): String
+}
+
+class Filter {
+  +applyFilter(startDate: Date, endDate: Date): List<WeatherData>
+}
+
+class SensorManager {
+  +activateSensor(sensor: Sensor): void
+  +deactivateSensor(sensor: Sensor): void
+}
+
+class Backup {
+  +createBackup(): void
+}
+
+class Synchronizer {
+  +syncData(): void
+}
+
+WeatherStation "1" -- "1" WeatherData : collects
+WeatherStation "1" -- "1" WeatherData : updates
+UserInterface "1" -- "1" WeatherData : displays
+Database "1" -- "0..*" WeatherData : stores
+WeatherStation "1" -- "0..*" WeatherAlert : triggers
+Report "1" -- "0..*" WeatherData : includes
+WeatherData "1" -- "1" Forecast : usedFor
+Filter "1" -- "0..*" WeatherData : filters
+SensorManager "1" -- "0..*" Sensor : manages
+Database "1" -- "0..*" Backup : backs up
+WeatherStation "1" -- "0..*" Synchronizer : synchronizes
+
+@enduml

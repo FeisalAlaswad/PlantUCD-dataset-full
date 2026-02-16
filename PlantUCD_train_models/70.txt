@@ -1,0 +1,90 @@
+@startUML
+class IoTDevice {
+  + deviceID: String
+  + name: String
+  + register(): void
+}
+
+class User {
+  + userID: String
+  + registerDevice(device: IoTDevice): void
+}
+
+class DataStream {
+  + streamID: String
+  + collectData(): void
+}
+
+class Authentication {
+  + authToken: String
+  + validateDevice(device: IoTDevice): boolean
+}
+
+class Database {
+  + dataID: String
+  + saveData(data: DataStream): void
+}
+
+class Monitor {
+  + displayStatus(device: IoTDevice): String
+}
+
+class Alert {
+  + alertID: String
+  + triggerAlert(device: IoTDevice): void
+}
+
+class Command {
+  + commandID: String
+  + execute(device: IoTDevice): void
+}
+
+class Dashboard {
+  + configID: String
+  + customizeLayout(): void
+}
+
+class DeviceGroup {
+  + groupID: String
+  + addDevice(device: IoTDevice): void
+}
+
+class DataAnalyzer {
+  + analyze(data: DataStream): String
+}
+
+class Role {
+  + roleID: String
+  + permissions: List<String>
+}
+
+class Scheduler {
+  + taskID: String
+  + scheduleTask(device: IoTDevice): void
+}
+
+class FaultDetection {
+  + faultID: String
+  + detect(device: IoTDevice): boolean
+}
+
+class Recovery {
+  + recoverFromFault(fault: FaultDetection): void
+}
+
+User --> IoTDevice : "registers"
+IoTDevice --> DataStream : "sends data"
+IoTDevice --> Authentication : "authenticates"
+DataStream --> Database : "stored in"
+IoTDevice --> Monitor : "monitored by"
+IoTDevice --> Alert : "triggers"
+User --> Command : "sends"
+Command --> IoTDevice : "executes on"
+User --> Dashboard : "configures"
+IoTDevice --> DeviceGroup : "belongs to"
+Database --> DataAnalyzer : "analyzed by"
+User --> Role : "assigned role"
+Scheduler --> IoTDevice : "schedules tasks for"
+IoTDevice --> FaultDetection : "monitored for faults"
+FaultDetection --> Recovery : "triggers recovery"
+@endUML
