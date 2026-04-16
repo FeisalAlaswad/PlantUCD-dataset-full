@@ -25,11 +25,72 @@ Available at: https://www.techrxiv.org/users/1012792/articles/1372916-plantucd-a
 
 
 **Description:**
-PlantUCD_dataset is a comprehensive collection of PlantUML code paired with corresponding software requirements, designed for Neural Machine Translation (NMT) in automatic class diagram modeling.
+PlantUCD_dataset is a comprehensive benchmark dataset consisting of natural-language software requirements paired with corresponding PlantUML class diagram representations. The dataset is designed to support Neural Machine Translation (NMT), Large Language Models (LLMs), and sequence-to-structure learning approaches for automatic UML class diagram generation from textual requirements.
+
+The dataset enables research in automated software modeling, requirements engineering, and AI-assisted software design by providing aligned requirement-to-diagram structural mappings.
+
+---
 
 ## Dataset Overview
-- **File Format:**
-  - JSON file containing all dataset records.
+
+### Dataset Size
+
+| Metric | Train Set | Test Set |
+|-------|-----------|----------|
+| Total Samples | 8,137 | 1,409 |
+| Total Classes | 18,264 | 3,152 |
+| Total Attributes | 20,896 | 3,531 |
+| Total Methods | 8,894 | 1,609 |
+| Total Relations | 10,208 | 1,737 |
+
+Total dataset size: **9,546 requirement–diagram pairs**
+
+---
+
+### Structural Statistics per Sample
+
+| Metric | Train Set | Test Set |
+|-------|-----------|----------|
+| Avg Classes / Sample | 2.24 | 2.24 |
+| Avg Attributes / Sample | 2.57 | 2.51 |
+| Avg Methods / Sample | 1.09 | 1.14 |
+| Avg Relations / Sample | 1.25 | 1.23 |
+
+---
+
+### Maximum Structural Complexity per Sample
+
+| Metric | Train Set | Test Set |
+|-------|-----------|----------|
+| Max Classes | 6 | 4 |
+| Max Attributes | 13 | 10 |
+| Max Methods | 6 | 8 |
+| Max Relations | 5 | 4 |
+
+---
+
+### Relation Type Distribution
+
+| Relation Type | Train Set | Test Set |
+|--------------|-----------|----------|
+| Association | 5,082 | 854 |
+| Link | 3,780 | 593 |
+| Extension | 612 | 89 |
+| Composition | 552 | 93 |
+| Aggregation | 128 | 72 |
+| Dependency | 54 | 36 |
+
+---
+
+## File Format
+
+The dataset is provided as:
+
+- JSON format
+- Each record contains:
+  - natural-language software requirement description
+  - corresponding PlantUML class diagram representation
+  - structured diagram components (classes, attributes, methods, relations)
 
 ## Structure of a Record
 Each record in the dataset includes the following fields:
